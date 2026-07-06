@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Lock, MailOpen } from 'lucide-react';
 import { CustomizationPanel } from './components/CustomizationPanel';
 import { MailPreview } from './components/MailPreview';
 import { ExportOptions } from './components/ExportOptions';
@@ -43,6 +44,27 @@ function getInitialViewMode(): { mode: 'create' | 'tracker' | 'view'; letterId?:
   return { mode: 'create' };
 }
 
+function formatRealCountdown(letterId: string): string {
+  const match = letterId.match(/letter_(\d+)_/);
+  if (!match) return '00:00:00';
+  const sentAt = parseInt(match[1]);
+  const deliveryAt = sentAt + 30 * 1000;
+  const remaining = Math.max(0, deliveryAt - Date.now());
+  if (remaining === 0) return '00:00:00';
+  const s = Math.floor(remaining / 1000) % 60;
+  const m = Math.floor(remaining / 60000) % 60;
+  const h = Math.floor(remaining / 3600000);
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function generateStampData(letterId: string, location?: string): { from: string; to: string; progress: number } {
+  const match = letterId.match(/letter_(\d+)_/);
+  const sentAt = match ? parseInt(match[1]) : Date.now();
+  const deliveryAt = sentAt + 30 * 1000;
+  const progress = Math.min(1, Math.max(0, (Date.now() - sentAt) / (deliveryAt - sentAt)));
+  return { from: location || 'Somewhere', to: 'Your Mailbox', progress };
+}
+
 export default function App() {
   const [viewMode, setViewMode] = useState<{ mode: 'create' | 'tracker' | 'view'; letterId?: string }>(getInitialViewMode);
   const [senderView, setSenderView] = useState<'compose' | 'sending' | 'success'>('compose');
@@ -78,7 +100,18 @@ export default function App() {
     rotation: number;
   }>>([]);
 
+  const [countdown, setCountdown] = useState('');
+
   const previewRef = useRef<HTMLDivElement>(null);
+
+  // Live countdown timer for in-transit tracker
+  useEffect(() => {
+    if (viewMode.mode !== 'tracker' || !viewMode.letterId || trackerStatus !== 'transit') return;
+    const tick = () => setCountdown(formatRealCountdown(viewMode.letterId!));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [viewMode, trackerStatus]);
 
   // Capture deep link on mount, save to sessionStorage to survive Figma Sites redirect
   useEffect(() => {
@@ -179,49 +212,134 @@ export default function App() {
 
   // Tracker view
   if (viewMode.mode === 'tracker' && viewMode.letterId) {
+    const lid = viewMode.letterId;
+    const isDelivered = trackerStatus === 'delivered';
+    const stamps = generateStampData(lid, letter?.location);
+
+    if (letterLoading) {
+      return (
+        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
+          <div className="text-center animate-pulse">
+            <div className="text-5xl mb-3">📬</div>
+            <p className="text-[#8B7355] text-sm italic">Loading your tracking page…</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (letterError && !trackerStatus) {
+      return (
+        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
+          <div className="text-center">
+            <div className="text-5xl mb-3">📭</div>
+            <p className="mb-2 text-[#3E3831]" style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.4rem' }}>
+              Tracking link expired
+            </p>
+            <a
+              href="https://snail-mail-inky.vercel.app"
+              className="text-sm text-[#8B7355] underline"
+              onClick={() => sessionStorage.removeItem('snailmail_route')}
+            >
+              Send a letter →
+            </a>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-        <div className="max-w-md w-full text-center">
-          <h1 className="text-[#3E3831] text-3xl mb-3" style={{ fontFamily: '"Instrument Serif", serif' }}>📬 snail mail</h1>
-          <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-8 shadow-lg mt-6">
-            {letterLoading && <p className="text-[#6B6256] italic">Checking delivery status...</p>}
-            {!letterLoading && trackerStatus === 'transit' && (
-              <>
-                <div className="text-6xl mb-4">🐌</div>
-                <h2 className="text-[#3E3831] text-xl mb-3">Your letter is on its way!</h2>
-                <p className="text-[#6B6256] italic mb-6">It's slowly making its way to you... check back soon.</p>
-                <div className="bg-[#E8E3DC] border-2 border-[#D4CFC5] p-4 text-sm text-[#6B6256]">
-                  📮 <strong>Status:</strong> In Transit
+      <div className="min-h-screen bg-[#F7F4F0] p-8">
+        <div className="max-w-2xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2.2rem', color: '#3E3831', lineHeight: 1 }}>
+              snail mail
+            </h1>
+            <p className="text-xs uppercase tracking-widest text-[#8B7355] mt-1">Live Transit Tracker</p>
+          </div>
+
+          {/* Card */}
+          <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] p-6">
+            {/* Status bar */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E8E3DC]">
+              <span className="font-mono text-xs text-[#8B7355] truncate max-w-[60%]">{lid}</span>
+              {isDelivered ? (
+                <span className="text-xs px-2 py-1 bg-[#D4EDE7] text-[#2D6B5A] border border-[#A3D1C7]">✦ Delivered</span>
+              ) : (
+                <span className="text-xs px-2 py-1 bg-[#FFF3CD] text-[#856404] border border-[#FFE08A]">✦ In Transit</span>
+              )}
+            </div>
+
+            {/* Route section */}
+            <div className="mb-5">
+              <div className="flex items-center gap-3">
+                <div className="text-center flex-shrink-0">
+                  <div className="text-2xl mb-1">✉️</div>
+                  <p className="text-xs uppercase tracking-widest text-[#6B6256]">{stamps.from}</p>
                 </div>
-                <button
-                  onClick={() => window.location.reload()}
-                  className="mt-4 px-6 py-2 border-2 border-[#8B7355] text-[#8B7355] hover:bg-[#8B7355] hover:text-[#FEFDFB] transition-colors text-sm"
-                >
-                  Refresh Status
-                </button>
-              </>
-            )}
-            {!letterLoading && trackerStatus === 'delivered' && letter && (
-              <>
-                <div className="text-6xl mb-4">💌</div>
-                <h2 className="text-[#3E3831] text-xl mb-3">Your letter has arrived!</h2>
-                <p className="text-[#6B6256] italic mb-6">Click below to read your message.</p>
+                <div className="flex-1 relative h-px bg-[#E8E3DC] mx-2">
+                  <div
+                    className="absolute inset-y-0 left-0 bg-[#8B7355] transition-all duration-1000"
+                    style={{ width: `${stamps.progress * 100}%` }}
+                  />
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#8B7355] border-2 border-[#FEFDFB] transition-all duration-1000"
+                    style={{ left: `calc(${stamps.progress * 100}% - 5px)` }}
+                  />
+                </div>
+                <div className="text-center flex-shrink-0">
+                  <div className="text-2xl mb-1">📬</div>
+                  <p className="text-xs uppercase tracking-widest text-[#6B6256]">{stamps.to}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="h-0.5 bg-[#E8E3DC] mb-6">
+              <div className="h-full bg-[#8B7355] transition-all duration-1000" style={{ width: `${stamps.progress * 100}%` }} />
+            </div>
+
+            {isDelivered ? (
+              <div className="text-center py-4">
+                <div className="text-5xl mb-4">📬</div>
+                <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.6rem', color: '#3E3831', marginBottom: '1rem' }}>
+                  Your letter has arrived!
+                </h2>
                 <button
                   onClick={() => {
-                    const newMode = { mode: 'view' as const, letterId: viewMode.letterId };
+                    const newMode = { mode: 'view' as const, letterId: lid };
                     sessionStorage.setItem('snailmail_route', JSON.stringify(newMode));
                     setViewMode(newMode);
                   }}
-                  className="px-8 py-4 bg-[#8B7355] text-[#FEFDFB] border-2 border-[#8B7355] hover:bg-[#6B5335] transition-colors text-lg"
+                  className="text-[#8B7355] text-base hover:underline"
                 >
-                  Open Your Letter
+                  Open Your Letter →
                 </button>
-              </>
-            )}
-            {!letterLoading && letterError && (
-              <p className="text-[#6B6256]">{letterError}</p>
+              </div>
+            ) : (
+              <div>
+                {/* Countdown */}
+                <div className="text-center mb-6">
+                  <p className="text-xs uppercase tracking-widest text-[#8B7355] mb-2">Arriving in</p>
+                  <p className="font-mono text-[#3E3831]" style={{ fontSize: '3rem' }}>
+                    {countdown || formatRealCountdown(lid)}
+                  </p>
+                  <p className="text-sm italic text-[#6B6256] mt-2">Slowly making its way to you...</p>
+                </div>
+
+                {/* Sealed notice */}
+                <div className="flex items-center gap-2 justify-center" style={{ opacity: 0.35 }}>
+                  <Lock className="w-4 h-4 text-[#8B7355]" />
+                  <span className="text-sm text-[#8B7355]">Sealed until arrival</span>
+                </div>
+              </div>
             )}
           </div>
+
+          {/* Footer */}
+          <p className="text-center text-xs text-[#8B7355] italic mt-6">
+            Delivered with patience ✦ snail mail
+          </p>
         </div>
       </div>
     );
