@@ -210,6 +210,52 @@ export default function App() {
     window.print();
   };
 
+  const STAR_DATA = [
+    { x: 6,   y: 9,  size: 20, rotation: 15,  delay: 0.0  },
+    { x: 22,  y: 3,  size: 16, rotation: 40,  delay: 0.3  },
+    { x: 44,  y: 7,  size: 14, rotation: -10, delay: 0.5  },
+    { x: 65,  y: 4,  size: 18, rotation: 60,  delay: 0.1  },
+    { x: 84,  y: 10, size: 15, rotation: -45, delay: 0.4  },
+    { x: 94,  y: 28, size: 17, rotation: 25,  delay: 0.2  },
+    { x: 91,  y: 55, size: 13, rotation: 70,  delay: 0.6  },
+    { x: 88,  y: 78, size: 19, rotation: -30, delay: 0.35 },
+    { x: 72,  y: 90, size: 14, rotation: 50,  delay: 0.15 },
+    { x: 50,  y: 94, size: 16, rotation: -55, delay: 0.45 },
+    { x: 28,  y: 91, size: 12, rotation: 20,  delay: 0.25 },
+    { x: 8,   y: 82, size: 18, rotation: -15, delay: 0.55 },
+    { x: 3,   y: 58, size: 15, rotation: 35,  delay: 0.1  },
+    { x: 5,   y: 35, size: 13, rotation: -60, delay: 0.4  },
+    { x: 33,  y: 20, size: 11, rotation: 80,  delay: 0.2  },
+    { x: 75,  y: 18, size: 14, rotation: -25, delay: 0.5  },
+  ];
+
+  const psStarPulseStyle = `
+    @keyframes psStarPulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.18); }
+    }
+    @keyframes psDot1 { 0%,66%,100%{opacity:0.2} 22%{opacity:1} }
+    @keyframes psDot2 { 0%,22%,88%,100%{opacity:0.2} 55%{opacity:1} }
+    @keyframes psDot3 { 0%,44%,100%{opacity:0.2} 77%{opacity:1} }
+  `;
+
+  const StarBg = () => (
+    <>
+      {STAR_DATA.map((s, i) => (
+        <div key={i} className="absolute pointer-events-none"
+          style={{ left: `${s.x}%`, top: `${s.y}%`,
+            animation: `psStarPulse ${2 + i * 0.12}s ease-in-out infinite`,
+            animationDelay: `${s.delay}s` }}>
+          <svg width={s.size} height={s.size} viewBox="0 0 20 20" fill="none"
+            style={{ transform: `rotate(${s.rotation}deg)` }}>
+            <path d="M10 1 L10 19 M1 10 L19 10 M3.5 3.5 L16.5 16.5 M16.5 3.5 L3.5 16.5"
+              stroke="#B8AFA6" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </div>
+      ))}
+    </>
+  );
+
   // Tracker view
   if (viewMode.mode === 'tracker' && viewMode.letterId) {
     const lid = viewMode.letterId;
@@ -218,10 +264,17 @@ export default function App() {
 
     if (letterLoading) {
       return (
-        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-          <div className="text-center animate-pulse">
-            <div className="text-5xl mb-3">📬</div>
-            <p className="text-[#8B7355] text-sm italic">Loading your tracking page…</p>
+        <div className="fixed inset-0 bg-[#F7F4F0] flex flex-col items-center justify-center overflow-hidden">
+          <style>{psStarPulseStyle}</style>
+          <StarBg />
+          <div className="relative z-10 text-center" style={{ animation: 'psStarPulse 1.6s ease-in-out infinite' }}>
+            <svg width="80" height="64" viewBox="0 0 80 64" fill="none" className="mx-auto mb-4">
+              <rect x="4" y="14" width="62" height="42" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
+              <path d="M4 14 L35 36 L66 14" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+            </svg>
+            <p style={{ fontFamily: 'monospace', letterSpacing: '0.18em', fontSize: '11px', color: '#6B6256', textTransform: 'uppercase' }}>
+              Loading your tracking page…
+            </p>
           </div>
         </div>
       );
@@ -229,115 +282,133 @@ export default function App() {
 
     if (letterError && !trackerStatus) {
       return (
-        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-          <div className="text-center">
-            <div className="text-5xl mb-3">📭</div>
-            <p className="mb-2 text-[#3E3831]" style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.4rem' }}>
+        <div className="fixed inset-0 bg-[#F7F4F0] flex flex-col items-center justify-center overflow-hidden">
+          <style>{psStarPulseStyle}</style>
+          <StarBg />
+          <div className="relative z-10 flex flex-col items-center gap-3 text-center px-8">
+            <svg width="80" height="64" viewBox="0 0 80 64" fill="none">
+              <rect x="4" y="14" width="62" height="42" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
+              <path d="M4 14 L35 36 L66 14" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+              <line x1="28" y1="32" x2="42" y2="32" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+              <line x1="35" y1="25" x2="35" y2="39" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+            </svg>
+            <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.6rem', color: '#3E3831' }}>
               Tracking link expired
-            </p>
+            </h2>
             <a
               href="https://snail-mail-inky.vercel.app"
-              className="text-sm text-[#8B7355] underline"
+              style={{ color: '#8B7355', fontSize: '13px', textDecoration: 'underline' }}
               onClick={() => sessionStorage.removeItem('snailmail_route')}
             >
               Send a letter →
             </a>
+            <p style={{ color: '#8B7355', fontSize: '12px', fontStyle: 'italic', marginTop: '8px' }}>
+              Delivered with patience ✦ snail mail
+            </p>
           </div>
         </div>
       );
     }
 
+    if (isDelivered) {
+      return (
+        <div className="fixed inset-0 bg-[#F7F4F0] flex flex-col items-center justify-center overflow-hidden">
+          <style>{psStarPulseStyle}</style>
+          <StarBg />
+          <div className="relative z-10 flex flex-col items-center gap-5 text-center px-8 max-w-md">
+            {/* Envelope with teal checkmark — same as success screen */}
+            <svg width="110" height="90" viewBox="0 0 110 90" fill="none">
+              <rect x="5" y="24" width="80" height="56" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
+              <path d="M5 24 L45 54 L85 24" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+              <rect x="26" y="8" width="38" height="30" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+              <line x1="32" y1="16" x2="58" y2="16" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="21" x2="58" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="26" x2="50" y2="26" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <circle cx="76" cy="68" r="14" fill="#5B9E8A"/>
+              <path d="M69 68 L74 73.5 L83 62" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2rem', color: '#3E3831', letterSpacing: '0.02em', lineHeight: 1.2 }}>
+              Your letter has arrived!
+            </h2>
+            <p style={{ color: '#6B6256', fontSize: '14px', lineHeight: 1.65, margin: 0 }}>
+              Your mail has completed its journey. Click below to read your message.
+            </p>
+            <button
+              onClick={() => {
+                const newMode = { mode: 'view' as const, letterId: lid };
+                sessionStorage.setItem('snailmail_route', JSON.stringify(newMode));
+                setViewMode(newMode);
+              }}
+              style={{ marginTop: '8px', padding: '15px 44px', background: '#1C1917', color: '#FEFDFB',
+                border: 'none', letterSpacing: '0.18em', fontSize: '11px', textTransform: 'uppercase',
+                cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
+            >
+              Open Your Letter
+            </button>
+            <p style={{ color: '#8B7355', fontSize: '12px', fontStyle: 'italic', marginTop: '2px' }}>
+              Delivered with patience ✦ snail mail
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    // In-transit state
     return (
-      <div className="min-h-screen bg-[#F7F4F0] p-8">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2.2rem', color: '#3E3831', lineHeight: 1 }}>
-              snail mail
-            </h1>
-            <p className="text-xs uppercase tracking-widest text-[#8B7355] mt-1">Live Transit Tracker</p>
+      <div className="fixed inset-0 bg-[#F7F4F0] flex flex-col items-center justify-center overflow-hidden">
+        <style>{psStarPulseStyle}</style>
+        <StarBg />
+        <div className="relative z-10 flex flex-col items-center gap-5 text-center px-8 max-w-md">
+          {/* Envelope with motion lines */}
+          <svg width="130" height="96" viewBox="0 0 130 96" fill="none">
+            <rect x="5" y="18" width="96" height="64" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
+            <path d="M5 18 L53 54 L101 18" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+            <rect x="32" y="6" width="42" height="30" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="38" y1="14" x2="68" y2="14" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="19" x2="68" y2="19" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="24" x2="60" y2="24" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="110" y1="42" x2="124" y2="42" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+            <line x1="113" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
+          </svg>
+
+          <div>
+            <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2rem', color: '#3E3831', letterSpacing: '0.02em', lineHeight: 1.2, marginBottom: '6px' }}>
+              Mail in Transit
+            </h2>
+            <p style={{ color: '#6B6256', fontSize: '14px', lineHeight: 1.65, margin: 0 }}>
+              Slowly making its way to you…
+            </p>
           </div>
 
-          {/* Card */}
-          <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] p-6">
-            {/* Status bar */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E8E3DC]">
-              <span className="font-mono text-xs text-[#8B7355] truncate max-w-[60%]">{lid}</span>
-              {isDelivered ? (
-                <span className="text-xs px-2 py-1 bg-[#D4EDE7] text-[#2D6B5A] border border-[#A3D1C7]">✦ Delivered</span>
-              ) : (
-                <span className="text-xs px-2 py-1 bg-[#FFF3CD] text-[#856404] border border-[#FFE08A]">✦ In Transit</span>
-              )}
-            </div>
-
-            {/* Route section */}
-            <div className="mb-5">
-              <div className="flex items-center gap-3">
-                <div className="text-center flex-shrink-0">
-                  <div className="text-2xl mb-1">✉️</div>
-                  <p className="text-xs uppercase tracking-widest text-[#6B6256]">{stamps.from}</p>
-                </div>
-                <div className="flex-1 relative h-px bg-[#E8E3DC] mx-2">
-                  <div
-                    className="absolute inset-y-0 left-0 bg-[#8B7355] transition-all duration-1000"
-                    style={{ width: `${stamps.progress * 100}%` }}
-                  />
-                  <div
-                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#8B7355] border-2 border-[#FEFDFB] transition-all duration-1000"
-                    style={{ left: `calc(${stamps.progress * 100}% - 5px)` }}
-                  />
-                </div>
-                <div className="text-center flex-shrink-0">
-                  <div className="text-2xl mb-1">📬</div>
-                  <p className="text-xs uppercase tracking-widest text-[#6B6256]">{stamps.to}</p>
-                </div>
+          {/* Route progress */}
+          <div style={{ width: '100%', maxWidth: '320px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <span style={{ fontSize: '12px', color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.12em', flexShrink: 0 }}>{stamps.from}</span>
+              <div style={{ flex: 1, height: '1px', background: '#D4CFC5', position: 'relative' }}>
+                <div style={{ position: 'absolute', inset: 0, background: '#8B7355', width: `${stamps.progress * 100}%`, transition: 'width 1s' }} />
+                <div style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, -50%)', width: '8px', height: '8px', borderRadius: '50%', background: '#8B7355', border: '2px solid #F7F4F0', left: `${stamps.progress * 100}%`, transition: 'left 1s' }} />
               </div>
+              <span style={{ fontSize: '12px', color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.12em', flexShrink: 0 }}>Mailbox</span>
             </div>
-
-            {/* Progress bar */}
-            <div className="h-0.5 bg-[#E8E3DC] mb-6">
-              <div className="h-full bg-[#8B7355] transition-all duration-1000" style={{ width: `${stamps.progress * 100}%` }} />
-            </div>
-
-            {isDelivered ? (
-              <div className="text-center py-4">
-                <div className="text-5xl mb-4">📬</div>
-                <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.6rem', color: '#3E3831', marginBottom: '1rem' }}>
-                  Your letter has arrived!
-                </h2>
-                <button
-                  onClick={() => {
-                    const newMode = { mode: 'view' as const, letterId: lid };
-                    sessionStorage.setItem('snailmail_route', JSON.stringify(newMode));
-                    setViewMode(newMode);
-                  }}
-                  className="text-[#8B7355] text-base hover:underline"
-                >
-                  Open Your Letter →
-                </button>
-              </div>
-            ) : (
-              <div>
-                {/* Countdown */}
-                <div className="text-center mb-6">
-                  <p className="text-xs uppercase tracking-widest text-[#8B7355] mb-2">Arriving in</p>
-                  <p className="font-mono text-[#3E3831]" style={{ fontSize: '3rem' }}>
-                    {countdown || formatRealCountdown(lid)}
-                  </p>
-                  <p className="text-sm italic text-[#6B6256] mt-2">Slowly making its way to you...</p>
-                </div>
-
-                {/* Sealed notice */}
-                <div className="flex items-center gap-2 justify-center" style={{ opacity: 0.35 }}>
-                  <Lock className="w-4 h-4 text-[#8B7355]" />
-                  <span className="text-sm text-[#8B7355]">Sealed until arrival</span>
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Footer */}
-          <p className="text-center text-xs text-[#8B7355] italic mt-6">
+          {/* Countdown */}
+          <div>
+            <p style={{ fontFamily: 'monospace', letterSpacing: '0.18em', fontSize: '11px', color: '#6B6256', textTransform: 'uppercase', marginBottom: '6px' }}>
+              Arriving in
+            </p>
+            <p style={{ fontFamily: 'monospace', fontSize: '2.8rem', color: '#3E3831', letterSpacing: '0.05em', lineHeight: 1 }}>
+              {countdown || formatRealCountdown(lid)}
+            </p>
+          </div>
+
+          {/* Sealed */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.35 }}>
+            <Lock style={{ width: '14px', height: '14px', color: '#8B7355' }} />
+            <span style={{ fontSize: '13px', color: '#8B7355' }}>Sealed until arrival</span>
+          </div>
+
+          <p style={{ color: '#8B7355', fontSize: '12px', fontStyle: 'italic', marginTop: '2px' }}>
             Delivered with patience ✦ snail mail
           </p>
         </div>
@@ -431,52 +502,6 @@ export default function App() {
       </div>
     );
   }
-
-  const STAR_DATA = [
-    { x: 6,   y: 9,  size: 20, rotation: 15,  delay: 0.0  },
-    { x: 22,  y: 3,  size: 16, rotation: 40,  delay: 0.3  },
-    { x: 44,  y: 7,  size: 14, rotation: -10, delay: 0.5  },
-    { x: 65,  y: 4,  size: 18, rotation: 60,  delay: 0.1  },
-    { x: 84,  y: 10, size: 15, rotation: -45, delay: 0.4  },
-    { x: 94,  y: 28, size: 17, rotation: 25,  delay: 0.2  },
-    { x: 91,  y: 55, size: 13, rotation: 70,  delay: 0.6  },
-    { x: 88,  y: 78, size: 19, rotation: -30, delay: 0.35 },
-    { x: 72,  y: 90, size: 14, rotation: 50,  delay: 0.15 },
-    { x: 50,  y: 94, size: 16, rotation: -55, delay: 0.45 },
-    { x: 28,  y: 91, size: 12, rotation: 20,  delay: 0.25 },
-    { x: 8,   y: 82, size: 18, rotation: -15, delay: 0.55 },
-    { x: 3,   y: 58, size: 15, rotation: 35,  delay: 0.1  },
-    { x: 5,   y: 35, size: 13, rotation: -60, delay: 0.4  },
-    { x: 33,  y: 20, size: 11, rotation: 80,  delay: 0.2  },
-    { x: 75,  y: 18, size: 14, rotation: -25, delay: 0.5  },
-  ];
-
-  const psStarPulseStyle = `
-    @keyframes psStarPulse {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.18); }
-    }
-    @keyframes psDot1 { 0%,66%,100%{opacity:0.2} 22%{opacity:1} }
-    @keyframes psDot2 { 0%,22%,88%,100%{opacity:0.2} 55%{opacity:1} }
-    @keyframes psDot3 { 0%,44%,100%{opacity:0.2} 77%{opacity:1} }
-  `;
-
-  const StarBg = () => (
-    <>
-      {STAR_DATA.map((s, i) => (
-        <div key={i} className="absolute pointer-events-none"
-          style={{ left: `${s.x}%`, top: `${s.y}%`,
-            animation: `psStarPulse ${2 + i * 0.12}s ease-in-out infinite`,
-            animationDelay: `${s.delay}s` }}>
-          <svg width={s.size} height={s.size} viewBox="0 0 20 20" fill="none"
-            style={{ transform: `rotate(${s.rotation}deg)` }}>
-            <path d="M10 1 L10 19 M1 10 L19 10 M3.5 3.5 L16.5 16.5 M16.5 3.5 L3.5 16.5"
-              stroke="#B8AFA6" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-        </div>
-      ))}
-    </>
-  );
 
   // Sending screen
   if (senderView === 'sending') {
