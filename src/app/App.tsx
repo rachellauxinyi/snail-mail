@@ -295,13 +295,12 @@ export default function App() {
             <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.6rem', color: '#3E3831' }}>
               Tracking link expired
             </h2>
-            <a
-              href="https://snail-mail-inky.vercel.app"
-              style={{ color: '#8B7355', fontSize: '13px', textDecoration: 'underline' }}
-              onClick={() => sessionStorage.removeItem('snailmail_route')}
+            <button
+              onClick={() => { sessionStorage.removeItem('snailmail_route'); setViewMode({ mode: 'create' }); }}
+              style={{ color: '#8B7355', fontSize: '13px', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               Send a letter →
-            </a>
+            </button>
             <p style={{ color: '#8B7355', fontSize: '12px', fontStyle: 'italic', marginTop: '8px' }}>
               Delivered with patience ✦ snail mail
             </p>
