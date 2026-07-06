@@ -295,7 +295,7 @@ export default function App() {
                     Want to send a letter back? 💌
                   </p>
                   <a
-                    href="https://venue-sienna-69575773.figma.site"
+                    href="https://snail-mail-inky.vercel.app"
                     className="inline-block px-8 py-4 bg-[#8B7355] text-[#FEFDFB] border-2 border-[#8B7355] hover:bg-[#6B5335] transition-colors text-lg"
                     onClick={() => sessionStorage.removeItem('snailmail_route')}
                   >

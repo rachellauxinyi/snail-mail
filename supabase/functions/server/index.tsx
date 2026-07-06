@@ -44,7 +44,7 @@ async function runProcessDeliveries(): Promise<{
       }
 
       const viewUrl =
-        `https://venue-sienna-69575773.figma.site#/view/${letter.letterId}`;
+        `https://snail-mail-inky.vercel.app#/view/${letter.letterId}`;
 
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",

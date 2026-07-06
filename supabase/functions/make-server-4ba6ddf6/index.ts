@@ -44,7 +44,7 @@ async function runProcessDeliveries(): Promise<{
       }
 
       const viewUrl =
-        `https://venue-sienna-69575773.figma.site/#/view/${letter.letterId}`;
+        `https://snail-mail-inky.vercel.app/#/view/${letter.letterId}`;
 
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -161,7 +161,7 @@ app.post("/make-server-4ba6ddf6/send-email", async (c) => {
 
     // Generate letter ID first so tracking URL can go in the notification email
     const letterId = `letter_${Date.now()}_${Math.random().toString(36).substring(7)}`;
-    const trackingUrl = `https://venue-sienna-69575773.figma.site/?t=${letterId}#tracker/${letterId}`;
+    const trackingUrl = `https://snail-mail-inky.vercel.app/?t=${letterId}#tracker/${letterId}`;
 
     // Send email using Resend API
     const response = await fetch('https://api.resend.com/emails', {
