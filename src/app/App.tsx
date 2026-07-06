@@ -319,10 +319,10 @@ export default function App() {
             <svg width="110" height="90" viewBox="0 0 110 90" fill="none">
               <rect x="5" y="24" width="80" height="56" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
               <path d="M5 24 L45 54 L85 24" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-              <rect x="26" y="17" width="38" height="21" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-              <line x1="32" y1="25" x2="58" y2="25" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-              <line x1="32" y1="30" x2="58" y2="30" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-              <line x1="32" y1="35" x2="50" y2="35" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <rect x="26" y="22" width="38" height="22" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+              <line x1="32" y1="28" x2="58" y2="28" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="33" x2="58" y2="33" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="38" x2="50" y2="38" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
               <circle cx="76" cy="68" r="14" fill="#5B9E8A"/>
               <path d="M69 68 L74 73.5 L83 62" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -362,10 +362,10 @@ export default function App() {
           <svg width="130" height="96" viewBox="0 0 130 96" fill="none">
             <rect x="5" y="18" width="96" height="64" rx="2" fill="#FAF6F0" stroke="#A89478" strokeWidth="1.5"/>
             <path d="M5 18 L53 54 L101 18" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-            <rect x="32" y="15" width="42" height="21" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-            <line x1="38" y1="23" x2="68" y2="23" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="28" x2="68" y2="28" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="33" x2="60" y2="33" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <rect x="32" y="16" width="42" height="22" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="38" y1="22" x2="68" y2="22" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="27" x2="68" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="32" x2="60" y2="32" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             <line x1="110" y1="42" x2="124" y2="42" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
             <line x1="113" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
           </svg>
@@ -515,10 +515,10 @@ export default function App() {
             {/* Envelope flap V */}
             <path d="M5 18 L53 54 L101 18" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             {/* Letter tucked in */}
-            <rect x="32" y="15" width="42" height="21" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-            <line x1="38" y1="23" x2="68" y2="23" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="28" x2="68" y2="28" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="33" x2="60" y2="33" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <rect x="32" y="16" width="42" height="22" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="38" y1="22" x2="68" y2="22" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="27" x2="68" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="32" x2="60" y2="32" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             {/* Motion lines */}
             <line x1="110" y1="42" x2="124" y2="42" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
             <line x1="113" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
