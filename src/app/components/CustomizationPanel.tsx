@@ -8,6 +8,10 @@ interface CustomizationPanelProps {
   setEnvelopeStyle: (style: string) => void;
   location: string;
   setLocation: (location: string) => void;
+  fromCity: string;
+  setFromCity: (v: string) => void;
+  toCity: string;
+  setToCity: (v: string) => void;
   recipientName: string;
   setRecipientName: (name: string) => void;
   letterText: string;
@@ -57,6 +61,10 @@ export function CustomizationPanel({
   setEnvelopeStyle,
   location,
   setLocation,
+  fromCity,
+  setFromCity,
+  toCity,
+  setToCity,
   decorations,
   setDecorations,
   recipientName,
@@ -308,6 +316,32 @@ export function CustomizationPanel({
             <div className="flex-1 text-xs text-[#6B6256]">
               Your stamp will feature <span className="font-medium text-[#3E3831]">{location}</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">From (City, Country)</label>
+            <input
+              type="text"
+              value={fromCity}
+              onChange={(e) => setFromCity(e.target.value)}
+              placeholder="e.g. Toronto, Canada"
+              className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">To (City, Country)</label>
+            <input
+              type="text"
+              value={toCity}
+              onChange={(e) => setToCity(e.target.value)}
+              placeholder="e.g. London, UK"
+              className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
+            />
           </div>
         </div>
       </div>
