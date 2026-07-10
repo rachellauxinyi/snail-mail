@@ -263,7 +263,7 @@ export function MailPreview({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 p-8">
+    <div className="flex flex-col items-center justify-center gap-4 lg:gap-8 p-2 lg:p-8">
       {showSignatureCanvas && (
         <SignatureCanvas
           onSave={(sig) => {
@@ -275,7 +275,7 @@ export function MailPreview({
         />
       )}
 
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col sm:flex-row sm:items-start sm:gap-4 lg:flex-col lg:items-center max-w-full overflow-x-hidden">
         {/* Location decorative elements */}
         <div className="absolute -top-4 -left-4 flex gap-2 text-2xl opacity-30">
           {stampData.decorativeEmojis.map((emoji, i) => (
@@ -371,7 +371,7 @@ export function MailPreview({
         ))}
 
         <div
-          className={`w-[500px] h-80 shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-visible border-2`}
+          className={`w-full max-w-[500px] h-48 sm:h-56 lg:h-80 shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-visible border-2`}
           style={{ borderColor: stampData.color + '40' }}
         >
           <div className="absolute inset-0 opacity-5" style={{
@@ -440,7 +440,7 @@ export function MailPreview({
         </div>
 
         <div
-          className={`mt-6 w-[450px] min-h-[600px] shadow-lg ${getTextureStyle(paperTexture)} border-2 p-8 relative`}
+          className={`mt-4 lg:mt-6 w-full max-w-[450px] min-h-[300px] lg:min-h-[600px] shadow-lg ${getTextureStyle(paperTexture)} border-2 p-4 lg:p-8 relative`}
           style={{ borderColor: stampData.accentColor + '40' }}
         >
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
