@@ -1,5 +1,77 @@
+import { useState, useRef, useEffect } from 'react';
 import { Sparkles, Upload, X } from 'lucide-react';
 import { generateStampData } from './StampGenerator';
+
+const CITY_DISPLAY_NAMES = [
+  'Amsterdam, Netherlands', 'Athens, Greece', 'Auckland, New Zealand',
+  'Austin, USA', 'Bali, Indonesia', 'Bangkok, Thailand', 'Barcelona, Spain',
+  'Berlin, Germany', 'Bogotá, Colombia', 'Boston, USA', 'Brussels, Belgium',
+  'Budapest, Hungary', 'Buenos Aires, Argentina', 'Cairo, Egypt',
+  'Cape Town, South Africa', 'Chicago, USA', 'Copenhagen, Denmark',
+  'Delhi, India', 'Denver, USA', 'Dubai, UAE', 'Dublin, Ireland',
+  'Edinburgh, Scotland', 'Fiji', 'Florence, Italy', 'Hanoi, Vietnam',
+  'Havana, Cuba', 'Hawaii, USA', 'Helsinki, Finland', 'Istanbul, Turkey',
+  'Jakarta, Indonesia', 'Jerusalem, Israel', 'Kraków, Poland', 'Kyoto, Japan',
+  'Lagos, Nigeria', 'Las Vegas, USA', 'Lima, Peru', 'Lisbon, Portugal',
+  'London, UK', 'Los Angeles, USA', 'Madrid, Spain', 'Manila, Philippines',
+  'Marrakesh, Morocco', 'Mexico City, Mexico', 'Miami, USA', 'Milan, Italy',
+  'Montréal, Canada', 'Mumbai, India', 'Munich, Germany', 'Nairobi, Kenya',
+  'Naples, Italy', 'Nashville, USA', 'New Orleans, USA', 'New York, USA',
+  'Oslo, Norway', 'Osaka, Japan', 'Paris, France', 'Philadelphia, USA',
+  'Portland, USA', 'Prague, Czech Republic', 'Reykjavík, Iceland',
+  'Rio de Janeiro, Brazil', 'Rome, Italy', 'San Francisco, USA',
+  'Santorini, Greece', 'Seattle, USA', 'Seoul, South Korea', 'Shanghai, China',
+  'Singapore', 'Stockholm, Sweden', 'Sydney, Australia', 'Tokyo, Japan',
+  'Toronto, Canada', 'Vancouver, Canada', 'Venice, Italy', 'Vienna, Austria',
+  'Washington DC, USA', 'Zürich, Switzerland',
+];
+
+function CityAutocomplete({ value, onChange, placeholder }: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const suggestions = value.length > 0
+    ? CITY_DISPLAY_NAMES.filter(c => c.toLowerCase().includes(value.toLowerCase())).slice(0, 6)
+    : [];
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => { onChange(e.target.value); setOpen(true); }}
+        onFocus={() => setOpen(true)}
+        placeholder={placeholder}
+        className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
+      />
+      {open && suggestions.length > 0 && (
+        <div className="absolute z-50 left-0 right-0 top-full border border-[#D4CFC5] bg-[#FEFDFB] shadow-sm">
+          {suggestions.map(city => (
+            <div
+              key={city}
+              className="px-3 py-2 text-sm text-[#3E3831] hover:bg-[#F7F4F0] cursor-pointer"
+              onMouseDown={(e) => { e.preventDefault(); onChange(city); setOpen(false); }}
+            >
+              {city}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 interface CustomizationPanelProps {
   paperTexture: string;
@@ -223,6 +295,28 @@ export function CustomizationPanel({
       </div>
 
       <div>
+        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">From (City, Country)</label>
+            <CityAutocomplete
+              value={fromCity}
+              onChange={setFromCity}
+              placeholder="e.g. Toronto, Canada"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">To (City, Country)</label>
+            <CityAutocomplete
+              value={toCity}
+              onChange={setToCity}
+              placeholder="e.g. London, UK"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
         <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide">
           Paper Texture
         </h3>
@@ -316,32 +410,6 @@ export function CustomizationPanel({
             <div className="flex-1 text-xs text-[#6B6256]">
               Your stamp will feature <span className="font-medium text-[#3E3831]">{location}</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
-        <div className="space-y-3">
-          <div>
-            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">From (City, Country)</label>
-            <input
-              type="text"
-              value={fromCity}
-              onChange={(e) => setFromCity(e.target.value)}
-              placeholder="e.g. Toronto, Canada"
-              className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
-            />
-          </div>
-          <div>
-            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">To (City, Country)</label>
-            <input
-              type="text"
-              value={toCity}
-              onChange={(e) => setToCity(e.target.value)}
-              placeholder="e.g. London, UK"
-              className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
-            />
           </div>
         </div>
       </div>

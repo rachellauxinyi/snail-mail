@@ -673,7 +673,7 @@ export default function App() {
               location={location}
               setLocation={setLocation}
               fromCity={fromCity}
-              setFromCity={setFromCity}
+              setFromCity={(v) => { setFromCity(v); setLocation(v.split(',')[0].trim()); }}
               toCity={toCity}
               setToCity={setToCity}
               decorations={decorations}
