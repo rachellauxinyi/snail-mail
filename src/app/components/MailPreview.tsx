@@ -380,7 +380,7 @@ export function MailPreview({
 
           <div className="absolute top-4 right-4 flex flex-col gap-1">
             {location && (
-              <div className="w-28 h-32 bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8] shadow-md border-4 border-[#FEFDFB] transform rotate-2 relative overflow-hidden">
+              <div className="w-14 h-16 sm:w-16 sm:h-20 lg:w-20 lg:h-24 bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8] shadow-md border-2 lg:border-4 border-[#FEFDFB] transform rotate-2 relative overflow-hidden">
                 {/* Perforated edges */}
                 <div className="absolute inset-0 pointer-events-none">
                   <div className="absolute top-0 left-0 right-0 h-1 flex justify-between px-[2px]">
@@ -407,7 +407,7 @@ export function MailPreview({
 
                 {/* Stamp content */}
                 <div className="flex flex-col items-center justify-center h-full p-2 border border-[#8B7355]/30 gap-1">
-                  <div className="text-4xl" style={{ filter: `hue-rotate(${stampData.color})` }}>
+                  <div className="text-xl lg:text-3xl" style={{ filter: `hue-rotate(${stampData.color})` }}>
                     {stampData.emoji}
                   </div>
                   <div className="text-[9px] text-[#3E3831] tracking-wide uppercase text-center px-1 leading-tight line-clamp-2 break-words w-full">
@@ -417,7 +417,7 @@ export function MailPreview({
                 </div>
 
                 {/* Postmark */}
-                <div className="absolute top-1 right-1 w-10 h-10 border-2 border-[#3E3831]/20 rounded-full flex items-center justify-center">
+                <div className="absolute top-1 right-1 w-5 h-5 lg:w-8 lg:h-8 border border-[#3E3831]/20 rounded-full flex items-center justify-center">
                   <div className="text-[8px] text-[#3E3831]/30 rotate-12 text-center leading-tight">MAY<br/>07</div>
                 </div>
               </div>
