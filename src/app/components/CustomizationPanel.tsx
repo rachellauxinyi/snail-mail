@@ -380,7 +380,7 @@ export function CustomizationPanel({
   return (
     <>
     {showCityModal && <CityRequestModal onClose={() => setShowCityModal(false)} />}
-    <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-6 space-y-6 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)]">
+    <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-6 space-y-6 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] h-full">
       <div className="flex items-center gap-2 pb-4 border-b-2 border-dashed border-[#D4CFC5]">
         <Sparkles className="w-5 h-5 text-[#8B7355]" />
         <h2 className="text-[#3E3831] tracking-wide uppercase text-sm">Customize Your Mail</h2>

@@ -663,8 +663,9 @@ export default function App() {
           <p className="text-[#6B6256] italic">Create the perfect personalized letter for someone special</p>
         </header>
 
-        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_2fr] gap-8 lg:items-start mb-8">
-          <div className="sticky top-8 order-2 lg:order-1">
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_2fr] gap-8 mb-8">
+          <div className="order-2 lg:order-1">
+            <div className="sticky top-8">
             <CustomizationPanel
               paperTexture={paperTexture}
               setPaperTexture={setPaperTexture}
@@ -685,6 +686,7 @@ export default function App() {
               uploadedImages={uploadedImages}
               setUploadedImages={setUploadedImages}
             />
+            </div>
           </div>
 
           <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-4 lg:p-8 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] flex flex-col order-1 lg:order-2">
