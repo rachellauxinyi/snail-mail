@@ -3,27 +3,48 @@ import { Sparkles, Upload, X } from 'lucide-react';
 import { generateStampData } from './StampGenerator';
 
 const CITY_DISPLAY_NAMES = [
-  'Amsterdam, Netherlands', 'Athens, Greece', 'Auckland, New Zealand',
-  'Austin, USA', 'Bali, Indonesia', 'Bangkok, Thailand', 'Barcelona, Spain',
-  'Berlin, Germany', 'Bogotá, Colombia', 'Boston, USA', 'Brussels, Belgium',
-  'Budapest, Hungary', 'Buenos Aires, Argentina', 'Cairo, Egypt',
-  'Cape Town, South Africa', 'Chicago, USA', 'Copenhagen, Denmark',
-  'Delhi, India', 'Denver, USA', 'Dubai, UAE', 'Dublin, Ireland',
-  'Edinburgh, Scotland', 'Fiji', 'Florence, Italy', 'Hanoi, Vietnam',
-  'Havana, Cuba', 'Hawaii, USA', 'Helsinki, Finland', 'Istanbul, Turkey',
-  'Jakarta, Indonesia', 'Jerusalem, Israel', 'Kraków, Poland', 'Kyoto, Japan',
+  'Abu Dhabi, UAE', 'Amsterdam, Netherlands', 'Anchorage, USA', 'Athens, Greece',
+  'Atlanta, USA', 'Auckland, New Zealand', 'Austin, USA',
+  'Bali, Indonesia', 'Baltimore, USA', 'Bangkok, Thailand', 'Barcelona, Spain',
+  'Beijing, China', 'Beirut, Lebanon', 'Belgrade, Serbia', 'Berlin, Germany',
+  'Bogotá, Colombia', 'Boston, USA', 'Brisbane, Australia', 'Brussels, Belgium',
+  'Bucharest, Romania', 'Budapest, Hungary', 'Buenos Aires, Argentina',
+  'Cairo, Egypt', 'Calgary, Canada', 'Cape Town, South Africa', 'Casablanca, Morocco',
+  'Charlotte, USA', 'Chicago, USA', 'Colombo, Sri Lanka', 'Columbus, USA',
+  'Copenhagen, Denmark', 'Cusco, Peru',
+  'Dakar, Senegal', 'Dallas, USA', 'Delhi, India', 'Denver, USA',
+  'Detroit, USA', 'Dhaka, Bangladesh', 'Doha, Qatar', 'Dubai, UAE', 'Dublin, Ireland',
+  'Edinburgh, Scotland',
+  'Fiji', 'Florence, Italy', 'Frankfurt, Germany',
+  'Glasgow, Scotland', 'Guadalajara, Mexico', 'Guatemala City, Guatemala',
+  'Hanoi, Vietnam', 'Havana, Cuba', 'Hawaii, USA', 'Helsinki, Finland',
+  'Ho Chi Minh City, Vietnam', 'Hong Kong', 'Houston, USA',
+  'Islamabad, Pakistan', 'Istanbul, Turkey',
+  'Jakarta, Indonesia', 'Jerusalem, Israel', 'Johannesburg, South Africa',
+  'Karachi, Pakistan', 'Kathmandu, Nepal', 'Kraków, Poland', 'Kuala Lumpur, Malaysia',
+  'Kuwait City, Kuwait', 'Kyoto, Japan',
   'Lagos, Nigeria', 'Las Vegas, USA', 'Lima, Peru', 'Lisbon, Portugal',
-  'London, UK', 'Los Angeles, USA', 'Madrid, Spain', 'Manila, Philippines',
-  'Marrakesh, Morocco', 'Mexico City, Mexico', 'Miami, USA', 'Milan, Italy',
-  'Montréal, Canada', 'Mumbai, India', 'Munich, Germany', 'Nairobi, Kenya',
-  'Naples, Italy', 'Nashville, USA', 'New Orleans, USA', 'New York, USA',
-  'Oslo, Norway', 'Osaka, Japan', 'Paris, France', 'Philadelphia, USA',
-  'Portland, USA', 'Prague, Czech Republic', 'Reykjavík, Iceland',
-  'Rio de Janeiro, Brazil', 'Rome, Italy', 'San Francisco, USA',
-  'Santorini, Greece', 'Seattle, USA', 'Seoul, South Korea', 'Shanghai, China',
-  'Singapore', 'Stockholm, Sweden', 'Sydney, Australia', 'Tokyo, Japan',
-  'Toronto, Canada', 'Vancouver, Canada', 'Venice, Italy', 'Vienna, Austria',
-  'Washington DC, USA', 'Zürich, Switzerland',
+  'Ljubljana, Slovenia', 'London, UK', 'Los Angeles, USA', 'Luxembourg City, Luxembourg',
+  'Madrid, Spain', 'Manila, Philippines', 'Marrakesh, Morocco',
+  'Melbourne, Australia', 'Mexico City, Mexico', 'Miami, USA', 'Milan, Italy',
+  'Minneapolis, USA', 'Montréal, Canada', 'Moscow, Russia', 'Mumbai, India',
+  'Munich, Germany', 'Muscat, Oman',
+  'Nairobi, Kenya', 'Naples, Italy', 'Nashville, USA', 'New Orleans, USA',
+  'New York, USA',
+  'Oslo, Norway', 'Osaka, Japan', 'Ottawa, Canada',
+  'Panama City, Panama', 'Paris, France', 'Perth, Australia', 'Philadelphia, USA',
+  'Phoenix, USA', 'Portland, USA', 'Porto, Portugal', 'Prague, Czech Republic',
+  'Reykjavík, Iceland', 'Riga, Latvia', 'Rio de Janeiro, Brazil', 'Riyadh, Saudi Arabia',
+  'Rome, Italy', 'Rotterdam, Netherlands',
+  'Salt Lake City, USA', 'San Diego, USA', 'San Francisco, USA', 'San José, Costa Rica',
+  'Santiago, Chile', 'Santorini, Greece', 'São Paulo, Brazil', 'Seattle, USA',
+  'Seoul, South Korea', 'Shanghai, China', 'Singapore', 'Sofia, Bulgaria',
+  'Stockholm, Sweden', 'Sydney, Australia',
+  'Taipei, Taiwan', 'Tallinn, Estonia', 'Tehran, Iran', 'Tel Aviv, Israel',
+  'Tokyo, Japan', 'Toronto, Canada',
+  'Vancouver, Canada', 'Venice, Italy', 'Vienna, Austria', 'Vilnius, Lithuania',
+  'Warsaw, Poland', 'Washington DC, USA',
+  'Zagreb, Croatia', 'Zürich, Switzerland',
 ];
 
 function CityAutocomplete({ value, onChange, placeholder }: {
@@ -34,8 +55,9 @@ function CityAutocomplete({ value, onChange, placeholder }: {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const suggestions = value.length > 0
-    ? CITY_DISPLAY_NAMES.filter(c => c.toLowerCase().includes(value.toLowerCase())).slice(0, 6)
+    ? CITY_DISPLAY_NAMES.filter(c => norm(c).includes(norm(value))).slice(0, 6)
     : [];
 
   useEffect(() => {

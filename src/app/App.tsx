@@ -663,7 +663,7 @@ export default function App() {
           <p className="text-[#6B6256] italic">Create the perfect personalized letter for someone special</p>
         </header>
 
-        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_2fr] gap-8 items-start mb-8">
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_2fr] gap-8 lg:items-start mb-8">
           <div className="sticky top-8 order-2 lg:order-1">
             <CustomizationPanel
               paperTexture={paperTexture}
