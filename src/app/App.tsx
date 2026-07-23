@@ -80,6 +80,7 @@ export default function App() {
   const [location, setLocation] = useState('Paris');
   const [fromCity, setFromCity] = useState('');
   const [toCity, setToCity] = useState('');
+  const [selectedStampEmoji, setSelectedStampEmoji] = useState<string | null>(null);
   const [recipientName, setRecipientName] = useState('Someone Special');
   const [letterText, setLetterText] = useState('');
   const [signature, setSignature] = useState<string | null>(null);
@@ -676,7 +677,9 @@ export default function App() {
               fromCity={fromCity}
               setFromCity={(v) => { setFromCity(v); setLocation(v.split(',')[0].trim()); }}
               toCity={toCity}
-              setToCity={setToCity}
+              setToCity={(v) => { setToCity(v); setSelectedStampEmoji(null); }}
+              selectedStampEmoji={selectedStampEmoji}
+              setSelectedStampEmoji={setSelectedStampEmoji}
               decorations={decorations}
               setDecorations={setDecorations}
               recipientName={recipientName}
@@ -696,6 +699,8 @@ export default function App() {
                 paperTexture={paperTexture}
                 envelopeStyle={envelopeStyle}
                 location={location}
+                toCity={toCity}
+                selectedStampEmoji={selectedStampEmoji}
                 recipientName={recipientName}
                 letterText={letterText}
                 signature={signature}

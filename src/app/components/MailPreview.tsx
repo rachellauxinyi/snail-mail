@@ -7,6 +7,8 @@ interface MailPreviewProps {
   paperTexture: string;
   envelopeStyle: string;
   location: string;
+  toCity?: string;
+  selectedStampEmoji?: string | null;
   recipientName: string;
   letterText: string;
   signature: string | null;
@@ -59,6 +61,8 @@ export function MailPreview({
   paperTexture,
   envelopeStyle,
   location,
+  toCity,
+  selectedStampEmoji,
   recipientName,
   letterText,
   signature,
@@ -70,7 +74,8 @@ export function MailPreview({
   decorations,
   setDecorations
 }: ExtendedMailPreviewProps) {
-  const stampData = generateStampData(location);
+  const stampData = generateStampData(toCity || location);
+  const stampEmoji = selectedStampEmoji === 'none' ? '' : (selectedStampEmoji || stampData.emoji);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedDecorationId, setSelectedDecorationId] = useState<string | null>(null);
   const [showSignatureCanvas, setShowSignatureCanvas] = useState(false);
@@ -426,9 +431,9 @@ export function MailPreview({
               </div>
               {/* Stamp content */}
               <div className="flex flex-col items-center justify-center h-full p-1 border border-[#8B7355]/30 gap-0.5">
-                <div className="text-xl">{stampData.emoji}</div>
+                <div className="text-xl">{stampEmoji}</div>
                 <div className="text-[7px] text-[#3E3831] tracking-wide uppercase text-center px-0.5 leading-tight line-clamp-2 break-words w-full">
-                  {location}
+                  {(toCity || location).split(',')[0]}
                 </div>
                 <div className="text-[6px] text-[#3E3831]/60">55¢</div>
               </div>
@@ -473,7 +478,7 @@ export function MailPreview({
 
           {/* Location-themed corner decoration */}
           <div className="absolute top-2 right-2 text-xl opacity-20">
-            {stampData.emoji}
+            {stampEmoji}
           </div>
 
           <div className="space-y-4 relative">

@@ -64,6 +64,8 @@ interface CustomizationPanelProps {
   setFromCity: (v: string) => void;
   toCity: string;
   setToCity: (v: string) => void;
+  selectedStampEmoji: string | null;
+  setSelectedStampEmoji: (emoji: string | null) => void;
   recipientName: string;
   setRecipientName: (name: string) => void;
   letterText: string;
@@ -226,6 +228,8 @@ export function CustomizationPanel({
   setFromCity,
   toCity,
   setToCity,
+  selectedStampEmoji,
+  setSelectedStampEmoji,
   decorations,
   setDecorations,
   recipientName,
@@ -236,7 +240,8 @@ export function CustomizationPanel({
   setUploadedImages
 }: CustomizationPanelProps) {
   const [showCityModal, setShowCityModal] = useState(false);
-  const stampData = generateStampData(location);
+  const stampData = generateStampData(toCity || location);
+  const stampEmojis = [stampData.emoji, ...stampData.decorativeEmojis].slice(0, 4);
 
   const getDecorationIcon = (type: string) => {
     const color = '#8B7355';
@@ -471,47 +476,44 @@ export function CustomizationPanel({
       </div>
 
       <div>
-        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide">Stamp Location</h3>
-        <div className="space-y-3">
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter a location..."
-            className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
-          />
-
-          {/* Stamp Preview */}
-          <div className="flex items-center gap-3 p-3 border-2 border-[#D4CFC5] bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8]">
-            <div className="flex-shrink-0 w-16 h-20 bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8] border-2 border-[#FEFDFB] shadow-sm relative">
-              {/* Mini perforations */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] flex justify-between px-[1px]">
-                {[...Array(6)].map((_, i) => (
-                  <div key={`preview-top-${i}`} className="w-[2px] h-[2px] rounded-full bg-[#FEFDFB]" />
-                ))}
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] flex justify-between px-[1px]">
-                {[...Array(6)].map((_, i) => (
-                  <div key={`preview-bottom-${i}`} className="w-[2px] h-[2px] rounded-full bg-[#FEFDFB]" />
-                ))}
-              </div>
-
-              <div className="border border-[#8B7355]/20 h-full flex flex-col items-center justify-center p-1 gap-0.5">
-                <div className="text-xl">
-                  {stampData.emoji}
-                </div>
-                <div className="text-[6px] text-[#3E3831] tracking-wide uppercase text-center line-clamp-2 px-1 leading-tight break-words w-full">
-                  {location}
-                </div>
-                <div className="text-[5px] text-[#3E3831]/60">55¢</div>
-              </div>
-            </div>
-
-            <div className="flex-1 text-xs text-[#6B6256]">
-              Your stamp will feature <span className="font-medium text-[#3E3831]">{location}</span>
+        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide font-semibold">Stamp</h3>
+        {toCity ? (
+          <div className="space-y-3">
+            <p className="text-xs text-[#6B6256]">
+              Pick an emoji for your <span className="text-[#8B7355] font-medium">{toCity.split(',')[0]}</span> stamp:
+            </p>
+            <div className="flex gap-2 flex-wrap">
+              {stampEmojis.map((emoji) => (
+                <button
+                  key={emoji}
+                  onClick={() => setSelectedStampEmoji(emoji === stampData.emoji && !selectedStampEmoji ? null : emoji)}
+                  className={`w-12 h-12 text-2xl flex items-center justify-center border-2 transition-colors ${
+                    (selectedStampEmoji === emoji) || (!selectedStampEmoji && emoji === stampData.emoji)
+                      ? 'border-[#8B7355] bg-[#F7F4F0]'
+                      : 'border-[#D4CFC5] bg-[#FEFDFB] hover:bg-[#F7F4F0]'
+                  }`}
+                >
+                  {emoji}
+                </button>
+              ))}
+              <button
+                onClick={() => setSelectedStampEmoji('none')}
+                title="No emoji"
+                className={`w-12 h-12 flex items-center justify-center border-2 transition-colors text-[#B8A99A] text-xs ${
+                  selectedStampEmoji === 'none'
+                    ? 'border-[#8B7355] bg-[#F7F4F0]'
+                    : 'border-[#D4CFC5] bg-[#FEFDFB] hover:bg-[#F7F4F0]'
+                }`}
+              >
+                ∅
+              </button>
             </div>
           </div>
-        </div>
+        ) : (
+          <p className="text-xs text-[#6B6256]/60 italic">
+            Enter a recipient city above to customise the stamp.
+          </p>
+        )}
       </div>
 
       <div>
