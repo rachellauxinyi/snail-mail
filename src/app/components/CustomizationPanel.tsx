@@ -241,7 +241,7 @@ export function CustomizationPanel({
 }: CustomizationPanelProps) {
   const [showCityModal, setShowCityModal] = useState(false);
   const stampData = generateStampData(toCity || location);
-  const stampEmojis = [stampData.emoji, ...stampData.decorativeEmojis].slice(0, 4);
+  const stampEmojis = [stampData.emoji, ...stampData.decorativeEmojis].slice(0, 5);
 
   const getDecorationIcon = (type: string) => {
     const color = '#8B7355';
@@ -498,14 +498,14 @@ export function CustomizationPanel({
               ))}
               <button
                 onClick={() => setSelectedStampEmoji('none')}
-                title="No emoji"
-                className={`w-12 h-12 flex items-center justify-center border-2 transition-colors text-[#B8A99A] text-xs ${
+                className={`w-12 h-12 flex flex-col items-center justify-center border-2 transition-colors gap-0.5 ${
                   selectedStampEmoji === 'none'
                     ? 'border-[#8B7355] bg-[#F7F4F0]'
                     : 'border-[#D4CFC5] bg-[#FEFDFB] hover:bg-[#F7F4F0]'
                 }`}
               >
-                ∅
+                <span className="text-base leading-none">🚫</span>
+                <span className="text-[9px] text-[#B8A99A] leading-none">none</span>
               </button>
             </div>
           </div>
