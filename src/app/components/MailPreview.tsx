@@ -371,8 +371,8 @@ export function MailPreview({
         ))}
 
         <div
-          className={`w-full shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-hidden border-2`}
-          style={{ borderColor: stampData.color + '40', aspectRatio: '3/2' }}
+          className={`w-full h-[200px] shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-hidden border-2`}
+          style={{ borderColor: stampData.color + '40' }}
         >
           {/* Subtle diagonal background pattern */}
           <div className="absolute inset-0 opacity-5" style={{
