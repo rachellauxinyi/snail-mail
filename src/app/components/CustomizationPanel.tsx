@@ -1,51 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Sparkles, Upload, X } from 'lucide-react';
 import { generateStampData } from './StampGenerator';
-
-const CITY_DISPLAY_NAMES = [
-  'Abu Dhabi, UAE', 'Amsterdam, Netherlands', 'Anchorage, USA', 'Athens, Greece',
-  'Atlanta, USA', 'Auckland, New Zealand', 'Austin, USA',
-  'Bali, Indonesia', 'Baltimore, USA', 'Bangkok, Thailand', 'Barcelona, Spain',
-  'Beijing, China', 'Beirut, Lebanon', 'Belgrade, Serbia', 'Berlin, Germany',
-  'Bogotá, Colombia', 'Boston, USA', 'Brisbane, Australia', 'Brussels, Belgium',
-  'Bucharest, Romania', 'Budapest, Hungary', 'Buenos Aires, Argentina',
-  'Cairo, Egypt', 'Calgary, Canada', 'Cape Town, South Africa', 'Casablanca, Morocco',
-  'Charlotte, USA', 'Chicago, USA', 'Colombo, Sri Lanka', 'Columbus, USA',
-  'Copenhagen, Denmark', 'Cusco, Peru',
-  'Dakar, Senegal', 'Dallas, USA', 'Delhi, India', 'Denver, USA',
-  'Detroit, USA', 'Dhaka, Bangladesh', 'Doha, Qatar', 'Dubai, UAE', 'Dublin, Ireland',
-  'Edinburgh, Scotland',
-  'Fiji', 'Florence, Italy', 'Frankfurt, Germany',
-  'Glasgow, Scotland', 'Guadalajara, Mexico', 'Guatemala City, Guatemala',
-  'Hanoi, Vietnam', 'Havana, Cuba', 'Hawaii, USA', 'Helsinki, Finland',
-  'Ho Chi Minh City, Vietnam', 'Hong Kong', 'Houston, USA',
-  'Islamabad, Pakistan', 'Istanbul, Turkey',
-  'Jakarta, Indonesia', 'Jerusalem, Israel', 'Johannesburg, South Africa',
-  'Karachi, Pakistan', 'Kathmandu, Nepal', 'Kraków, Poland', 'Kuala Lumpur, Malaysia',
-  'Kuwait City, Kuwait', 'Kyoto, Japan',
-  'Lagos, Nigeria', 'Las Vegas, USA', 'Lima, Peru', 'Lisbon, Portugal',
-  'Ljubljana, Slovenia', 'London, UK', 'Los Angeles, USA', 'Luxembourg City, Luxembourg',
-  'Madrid, Spain', 'Manila, Philippines', 'Marrakesh, Morocco',
-  'Melbourne, Australia', 'Mexico City, Mexico', 'Miami, USA', 'Milan, Italy',
-  'Minneapolis, USA', 'Montréal, Canada', 'Moscow, Russia', 'Mumbai, India',
-  'Munich, Germany', 'Muscat, Oman',
-  'Nairobi, Kenya', 'Naples, Italy', 'Nashville, USA', 'New Orleans, USA',
-  'New York, USA',
-  'Oslo, Norway', 'Osaka, Japan', 'Ottawa, Canada',
-  'Panama City, Panama', 'Paris, France', 'Perth, Australia', 'Philadelphia, USA',
-  'Phoenix, USA', 'Portland, USA', 'Porto, Portugal', 'Prague, Czech Republic',
-  'Reykjavík, Iceland', 'Riga, Latvia', 'Rio de Janeiro, Brazil', 'Riyadh, Saudi Arabia',
-  'Rome, Italy', 'Rotterdam, Netherlands',
-  'Salt Lake City, USA', 'San Diego, USA', 'San Francisco, USA', 'San José, Costa Rica',
-  'Santiago, Chile', 'Santorini, Greece', 'São Paulo, Brazil', 'Seattle, USA',
-  'Seoul, South Korea', 'Shanghai, China', 'Singapore', 'Sofia, Bulgaria',
-  'Stockholm, Sweden', 'Sydney, Australia',
-  'Taipei, Taiwan', 'Tallinn, Estonia', 'Tehran, Iran', 'Tel Aviv, Israel',
-  'Tokyo, Japan', 'Toronto, Canada',
-  'Vancouver, Canada', 'Venice, Italy', 'Vienna, Austria', 'Vilnius, Lithuania',
-  'Warsaw, Poland', 'Washington DC, USA',
-  'Zagreb, Croatia', 'Zürich, Switzerland',
-];
+import { CITY_NAMES } from '../data/cities';
 
 function CityAutocomplete({ value, onChange, placeholder }: {
   value: string;
@@ -57,7 +13,7 @@ function CityAutocomplete({ value, onChange, placeholder }: {
 
   const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const suggestions = value.length > 0
-    ? CITY_DISPLAY_NAMES.filter(c => norm(c).includes(norm(value))).slice(0, 6)
+    ? CITY_NAMES.filter(c => norm(c).includes(norm(value))).slice(0, 8)
     : [];
 
   useEffect(() => {
