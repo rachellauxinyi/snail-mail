@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Sparkles, Upload, X } from 'lucide-react';
 import { generateStampData } from './StampGenerator';
 import { CITY_NAMES } from '../data/cities';
@@ -105,8 +106,13 @@ interface CustomizationPanelProps {
 }
 
 function CityRequestModal({ onClose }: { onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+
+  const mailtoHref = `mailto:rachellauxinyi@gmail.com?subject=City%20Request%20-%20Snail%20Mail&body=I%20would%20like%20to%20request%20the%20following%20city%20be%20added%3A%0A%0ACity%3A%20${encodeURIComponent(city)}%0ACountry%3A%20${encodeURIComponent(country)}`;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/20" />
       <div
         className="relative bg-[#FEFDFB] border-2 border-[#D4CFC5] p-6 max-w-sm w-full shadow-[4px_4px_0px_0px_rgba(139,115,85,0.15)]"
@@ -115,21 +121,44 @@ function CityRequestModal({ onClose }: { onClose: () => void }) {
         <button onClick={onClose} className="absolute top-3 right-3 text-[#B8A99A] hover:text-[#8B7355] transition-colors">
           <X className="w-4 h-4" />
         </button>
-        <p className="text-[#3E3831] text-sm mb-1" style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.1rem' }}>
+        <p className="text-[#3E3831] mb-1" style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.1rem' }}>
           Request a City
         </p>
         <p className="text-[#6B6256] text-xs mb-4 leading-relaxed">
-          We'll review your request and add it within <span className="text-[#8B7355] font-medium">24 hours</span>. Send us your city and we'll get it added!
+          We'll review your request and add it within <span className="text-[#8B7355] font-medium">24 hours</span>.
         </p>
+        <div className="space-y-3 mb-4">
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">City</label>
+            <input
+              type="text"
+              value={city}
+              onChange={e => setCity(e.target.value)}
+              placeholder="e.g. Okinawa"
+              className="w-full px-3 py-2 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/40 focus:border-[#8B7355] focus:outline-none transition-colors text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">Country</label>
+            <input
+              type="text"
+              value={country}
+              onChange={e => setCountry(e.target.value)}
+              placeholder="e.g. Japan"
+              className="w-full px-3 py-2 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/40 focus:border-[#8B7355] focus:outline-none transition-colors text-sm"
+            />
+          </div>
+        </div>
         <a
-          href="mailto:rachellauxinyi@gmail.com?subject=City%20Request%20-%20Snail%20Mail&body=I%20would%20like%20to%20request%20the%20following%20city%20be%20added%3A%0A%0ACity%3A%20%0ACountry%3A%20"
+          href={mailtoHref}
           className="block w-full text-center px-4 py-2.5 border-2 border-[#8B7355] bg-[#8B7355] text-[#FEFDFB] text-sm hover:bg-[#6B5335] transition-colors"
           onClick={onClose}
         >
           Send Request →
         </a>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
