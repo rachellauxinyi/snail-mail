@@ -273,7 +273,15 @@ export function CustomizationPanel({
       </div>
 
       <div>
-        <h3 className="mb-3 text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
+        <div className="flex items-baseline justify-between mb-3">
+          <h3 className="text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
+          <a
+            href="mailto:rachellauxinyi@gmail.com?subject=City%20Request%20-%20Snail%20Mail&body=I%20would%20like%20to%20request%20the%20following%20city%20be%20added%3A%0A%0ACity%3A%20%0ACountry%3A%20"
+            className="text-[10px] text-[#B8A99A] hover:text-[#8B7355] transition-colors"
+          >
+            Can't find your city? Request it →
+          </a>
+        </div>
         <div className="space-y-3">
           <div>
             <label className="block text-xs text-[#8B7355] uppercase tracking-widest mb-1">From (City, Country)</label>
