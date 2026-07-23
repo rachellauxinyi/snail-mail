@@ -7,6 +7,8 @@ interface MailPreviewProps {
   paperTexture: string;
   envelopeStyle: string;
   location: string;
+  toCity?: string;
+  selectedStampEmoji?: string | null;
   recipientName: string;
   letterText: string;
   signature: string | null;
@@ -59,6 +61,8 @@ export function MailPreview({
   paperTexture,
   envelopeStyle,
   location,
+  toCity,
+  selectedStampEmoji,
   recipientName,
   letterText,
   signature,
@@ -70,7 +74,8 @@ export function MailPreview({
   decorations,
   setDecorations
 }: ExtendedMailPreviewProps) {
-  const stampData = generateStampData(location);
+  const stampData = generateStampData(toCity || location);
+  const stampEmoji = selectedStampEmoji === 'none' ? '' : (selectedStampEmoji || stampData.emoji);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedDecorationId, setSelectedDecorationId] = useState<string | null>(null);
   const [showSignatureCanvas, setShowSignatureCanvas] = useState(false);
@@ -263,7 +268,7 @@ export function MailPreview({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 p-8">
+    <div className="flex flex-col gap-4 lg:gap-6 p-4 lg:p-6">
       {showSignatureCanvas && (
         <SignatureCanvas
           onSave={(sig) => {
@@ -275,7 +280,7 @@ export function MailPreview({
         />
       )}
 
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col gap-4 w-full">
         {/* Location decorative elements */}
         <div className="absolute -top-4 -left-4 flex gap-2 text-2xl opacity-30">
           {stampData.decorativeEmojis.map((emoji, i) => (
@@ -371,76 +376,100 @@ export function MailPreview({
         ))}
 
         <div
-          className={`w-[500px] h-80 shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-visible border-2`}
+          className={`w-full h-[260px] lg:h-[340px] shadow-lg ${getEnvelopeColor(envelopeStyle)} relative overflow-hidden border-2`}
           style={{ borderColor: stampData.color + '40' }}
         >
+          {/* Subtle diagonal background pattern */}
           <div className="absolute inset-0 opacity-5" style={{
             backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, ${stampData.color}15 10px, ${stampData.color}15 20px)`
           }} />
 
-          <div className="absolute top-4 right-4 flex flex-col gap-1">
-            {location && (
-              <div className="w-28 h-32 bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8] shadow-md border-4 border-[#FEFDFB] transform rotate-2 relative overflow-hidden">
-                {/* Perforated edges */}
-                <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-0 left-0 right-0 h-1 flex justify-between px-[2px]">
-                    {[...Array(8)].map((_, i) => (
-                      <div key={`top-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
-                    ))}
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 flex justify-between px-[2px]">
-                    {[...Array(8)].map((_, i) => (
-                      <div key={`bottom-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
-                    ))}
-                  </div>
-                  <div className="absolute top-0 left-0 bottom-0 w-1 flex flex-col justify-between py-[2px]">
-                    {[...Array(10)].map((_, i) => (
-                      <div key={`left-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
-                    ))}
-                  </div>
-                  <div className="absolute top-0 right-0 bottom-0 w-1 flex flex-col justify-between py-[2px]">
-                    {[...Array(10)].map((_, i) => (
-                      <div key={`right-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Stamp content */}
-                <div className="flex flex-col items-center justify-center h-full p-2 border border-[#8B7355]/30 gap-1">
-                  <div className="text-4xl" style={{ filter: `hue-rotate(${stampData.color})` }}>
-                    {stampData.emoji}
-                  </div>
-                  <div className="text-[9px] text-[#3E3831] tracking-wide uppercase text-center px-1 leading-tight line-clamp-2 break-words w-full">
-                    {location}
-                  </div>
-                  <div className="text-[8px] text-[#3E3831]/60">55¢</div>
-                </div>
-
-                {/* Postmark */}
-                <div className="absolute top-1 right-1 w-10 h-10 border-2 border-[#3E3831]/20 rounded-full flex items-center justify-center">
-                  <div className="text-[8px] text-[#3E3831]/30 rotate-12 text-center leading-tight">MAY<br/>07</div>
-                </div>
-              </div>
-            )}
+          {/* Envelope fold lines */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Top flap triangle */}
+            <div className="absolute top-0 left-0 w-full h-full" style={{
+              background: `${stampData.color}09`,
+              clipPath: 'polygon(0 0, 100% 0, 50% 36%)'
+            }} />
+            {/* Left side fold */}
+            <div className="absolute top-0 left-0 w-full h-full" style={{
+              background: `${stampData.color}05`,
+              clipPath: 'polygon(0 0, 0 100%, 44% 50%)'
+            }} />
+            {/* Right side fold */}
+            <div className="absolute top-0 left-0 w-full h-full" style={{
+              background: `${stampData.color}05`,
+              clipPath: 'polygon(100% 0, 100% 100%, 56% 50%)'
+            }} />
           </div>
 
-          <div className="absolute inset-x-12 bottom-32 top-20 flex flex-col items-center justify-center gap-3">
-            <div className="text-center font-serif italic text-lg" style={{ color: stampData.color }}>
+          {/* Stamp — top-right corner, fixed size */}
+          {location && (
+            <div className="absolute top-3 right-3 z-10 w-[56px] h-[66px] bg-gradient-to-br from-[#F5E8D8] to-[#E8D8C8] shadow-md border-2 border-[#FEFDFB] transform rotate-1 overflow-hidden flex-shrink-0">
+              {/* Perforated edges */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-0 right-0 h-1 flex justify-between px-[1px]">
+                  {[...Array(7)].map((_, i) => (
+                    <div key={`top-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
+                  ))}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 flex justify-between px-[1px]">
+                  {[...Array(7)].map((_, i) => (
+                    <div key={`bottom-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
+                  ))}
+                </div>
+                <div className="absolute top-0 left-0 bottom-0 w-1 flex flex-col justify-between py-[1px]">
+                  {[...Array(9)].map((_, i) => (
+                    <div key={`left-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
+                  ))}
+                </div>
+                <div className="absolute top-0 right-0 bottom-0 w-1 flex flex-col justify-between py-[1px]">
+                  {[...Array(9)].map((_, i) => (
+                    <div key={`right-${i}`} className="w-1 h-1 rounded-full bg-[#FEFDFB]" />
+                  ))}
+                </div>
+              </div>
+              {/* Stamp content */}
+              <div className="flex flex-col items-center justify-center h-full p-1 border border-[#8B7355]/30 gap-0.5">
+                <div className="text-xl">{stampEmoji}</div>
+                <div className="text-[7px] text-[#3E3831] tracking-wide uppercase text-center px-0.5 leading-tight line-clamp-2 break-words w-full">
+                  {(toCity || location).split(',')[0]}
+                </div>
+                <div className="text-[6px] text-[#3E3831]/60">55¢</div>
+              </div>
+              {/* Postmark */}
+              <div className="absolute top-0.5 right-0.5 w-[18px] h-[18px] border border-[#3E3831]/20 rounded-full flex items-center justify-center">
+                <div className="text-[5px] text-[#3E3831]/30 rotate-12 text-center leading-none">MAY<br/>07</div>
+              </div>
+            </div>
+          )}
+
+          {/* Greeting + from — vertically centered, left side */}
+          <div className="absolute left-7 top-1/2 -translate-y-1/2 flex flex-col gap-1 max-w-[55%]">
+            <div className="font-serif italic text-base leading-tight" style={{ color: stampData.color }}>
               {stampData.greeting}
             </div>
+            <div className="text-[10px] uppercase tracking-widest opacity-50 leading-tight" style={{ color: stampData.color }}>
+              {location}
+            </div>
+          </div>
+
+          {/* TO: recipient name — bottom right */}
+          <div className="absolute bottom-4 right-5 flex flex-col items-end gap-0.5">
+            <div className="text-[8px] uppercase tracking-widest opacity-40" style={{ color: stampData.color }}>To</div>
             <input
               type="text"
               value={recipientName}
               onChange={(e) => setRecipientName?.(e.target.value)}
-              placeholder="Type recipient name..."
-              className="text-center text-[#3E3831]/70 font-serif italic text-base bg-transparent border-b border-dashed border-[#3E3831]/20 focus:border-[#3E3831]/50 focus:outline-none px-2 py-1 w-full"
+              placeholder="Recipient name..."
+              className="text-right font-serif italic text-sm bg-transparent border-b border-dashed border-[#3E3831]/20 focus:border-[#3E3831]/50 focus:outline-none px-1 py-0.5 max-w-[140px]"
               style={{ color: stampData.accentColor }}
             />
           </div>
         </div>
 
         <div
-          className={`mt-6 w-[450px] min-h-[600px] shadow-lg ${getTextureStyle(paperTexture)} border-2 p-8 relative`}
+          className={`w-full min-h-[400px] lg:min-h-[600px] shadow-lg ${getTextureStyle(paperTexture)} border-2 p-4 lg:p-8 relative`}
           style={{ borderColor: stampData.accentColor + '40' }}
         >
           <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
@@ -449,7 +478,7 @@ export function MailPreview({
 
           {/* Location-themed corner decoration */}
           <div className="absolute top-2 right-2 text-xl opacity-20">
-            {stampData.emoji}
+            {stampEmoji}
           </div>
 
           <div className="space-y-4 relative">
