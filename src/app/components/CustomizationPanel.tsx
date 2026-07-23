@@ -104,6 +104,35 @@ interface CustomizationPanelProps {
   }>) => void;
 }
 
+function CityRequestModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/20" />
+      <div
+        className="relative bg-[#FEFDFB] border-2 border-[#D4CFC5] p-6 max-w-sm w-full shadow-[4px_4px_0px_0px_rgba(139,115,85,0.15)]"
+        onClick={e => e.stopPropagation()}
+      >
+        <button onClick={onClose} className="absolute top-3 right-3 text-[#B8A99A] hover:text-[#8B7355] transition-colors">
+          <X className="w-4 h-4" />
+        </button>
+        <p className="text-[#3E3831] text-sm mb-1" style={{ fontFamily: '"Instrument Serif", serif', fontSize: '1.1rem' }}>
+          Request a City
+        </p>
+        <p className="text-[#6B6256] text-xs mb-4 leading-relaxed">
+          We'll review your request and add it within <span className="text-[#8B7355] font-medium">24 hours</span>. Send us your city and we'll get it added!
+        </p>
+        <a
+          href="mailto:rachellauxinyi@gmail.com?subject=City%20Request%20-%20Snail%20Mail&body=I%20would%20like%20to%20request%20the%20following%20city%20be%20added%3A%0A%0ACity%3A%20%0ACountry%3A%20"
+          className="block w-full text-center px-4 py-2.5 border-2 border-[#8B7355] bg-[#8B7355] text-[#FEFDFB] text-sm hover:bg-[#6B5335] transition-colors"
+          onClick={onClose}
+        >
+          Send Request →
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export function CustomizationPanel({
   paperTexture,
   setPaperTexture,
@@ -124,6 +153,7 @@ export function CustomizationPanel({
   uploadedImages,
   setUploadedImages
 }: CustomizationPanelProps) {
+  const [showCityModal, setShowCityModal] = useState(false);
   const stampData = generateStampData(location);
 
   const getDecorationIcon = (type: string) => {
@@ -266,6 +296,8 @@ export function CustomizationPanel({
   };
 
   return (
+    <>
+    {showCityModal && <CityRequestModal onClose={() => setShowCityModal(false)} />}
     <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-6 space-y-6 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)]">
       <div className="flex items-center gap-2 pb-4 border-b-2 border-dashed border-[#D4CFC5]">
         <Sparkles className="w-5 h-5 text-[#8B7355]" />
@@ -275,12 +307,12 @@ export function CustomizationPanel({
       <div>
         <div className="flex items-baseline justify-between mb-3">
           <h3 className="text-[#3E3831] text-sm tracking-wide font-semibold">Delivery Route</h3>
-          <a
-            href="mailto:rachellauxinyi@gmail.com?subject=City%20Request%20-%20Snail%20Mail&body=I%20would%20like%20to%20request%20the%20following%20city%20be%20added%3A%0A%0ACity%3A%20%0ACountry%3A%20"
+          <button
+            onClick={() => setShowCityModal(true)}
             className="text-[10px] text-[#B8A99A] hover:text-[#8B7355] transition-colors"
           >
             Can't find your city? Request it →
-          </a>
+          </button>
         </div>
         <div className="space-y-3">
           <div>
@@ -478,5 +510,6 @@ export function CustomizationPanel({
         )}
       </div>
     </div>
+    </>
   );
 }
