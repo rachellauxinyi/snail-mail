@@ -94,9 +94,8 @@ function SnailSVG() {
       <circle cx="66" cy="30" r="10" fill="none" stroke="#3E3831" strokeWidth="0.85"/>
       <circle cx="66" cy="30" r="5"  fill="none" stroke="#3E3831" strokeWidth="0.8"/>
       <circle cx="66" cy="30" r="1.5" fill="#3E3831" opacity="0.55"/>
-      {/* Eye dots on head */}
-      <circle cx="14" cy="28" r="1.8" fill="#3E3831"/>
-      <circle cx="20" cy="26" r="1.4" fill="#3E3831"/>
+      {/* Single eye — side profile */}
+      <circle cx="16" cy="27" r="1.8" fill="#3E3831"/>
       {/* Long antenna (upper) */}
       <path d="M16 14 C13 6 11 0 9 -6" stroke="#3E3831" strokeWidth="1.1" strokeLinecap="round"/>
       <circle cx="9" cy="-7" r="2" fill="#3E3831"/>
