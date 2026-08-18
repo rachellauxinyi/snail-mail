@@ -175,12 +175,9 @@ export function MailPreview({
                 <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" xChannelSelector="R" yChannelSelector="G"/>
               </filter>
             </defs>
-            <path d="M20 5 L22 15 L32 15 L24 22 L27 32 L20 26 L13 32 L16 22 L8 15 L18 15 Z"
-                  stroke="#C9A840" strokeWidth="1.5" fill="#E8C568" fillOpacity="0.4"
-                  filter="url(#pencil-stars)" strokeLinejoin="round"/>
-            <path d="M33 6 L34 10 L38 10 L35 13 L36 17 L33 14 L30 17 L31 13 L28 10 L32 10 Z"
-                  stroke="#C9A840" strokeWidth="1" fill="#E8C568" fillOpacity="0.4"
-                  filter="url(#pencil-stars)" strokeLinejoin="round"/>
+            <path d="M20 5 L21 18 L20 35 M10 12 L20 20 L30 12 M30 28 L20 20 L10 28"
+                  stroke={color} strokeWidth="2" strokeLinecap="round"
+                  filter="url(#pencil-stars)" opacity="0.7"/>
           </svg>
         );
       case 'hearts':
