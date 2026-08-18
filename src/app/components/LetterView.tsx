@@ -125,7 +125,8 @@ export function LetterView({ letterId }: { letterId: string }) {
     );
   }
 
-  const fromCity = letter?.location || 'somewhere special';
+  const fromCity = letter?.senderCity || letter?.location || 'somewhere special';
+  const toCity   = letter?.receiverCity || '';
   const toName   = letter?.recipientName || 'You';
   const bgColor  = getTextureStyle(letter?.paperTexture);
 
@@ -241,7 +242,7 @@ export function LetterView({ letterId }: { letterId: string }) {
         {/* From → To caption under envelope */}
         <div className="relative z-10 text-center mt-6">
           <p style={{ fontFamily: 'monospace', fontSize: 11, color: '#8B7355', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-            {fromCity} → {toName}
+            {fromCity}{toCity ? ` → ${toCity}` : ''}
           </p>
         </div>
       </div>

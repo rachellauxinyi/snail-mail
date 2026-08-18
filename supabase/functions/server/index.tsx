@@ -147,7 +147,7 @@ app.get("/make-server-4ba6ddf6/health", (c) => {
 // Send email notification endpoint
 app.post("/make-server-4ba6ddf6/send-email", async (c) => {
   try {
-    const { recipientEmail, recipientName, letterData } = await c.req.json();
+    const { recipientEmail, recipientName, senderCity, receiverCity, letterData } = await c.req.json();
 
     if (!recipientEmail || !recipientEmail.includes('@')) {
       return c.json({ error: 'Invalid email address' }, 400);
@@ -220,11 +220,19 @@ app.post("/make-server-4ba6ddf6/send-email", async (c) => {
     // For production: const deliveryDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000); // 3 days from now
 
     await kv.set(letterId, {
-      ...letterData,
       letterId,
+      recipientName: letterData.recipientName ?? recipientName,
+      recipientEmail,
+      letterText: letterData.letterText,
+      paperTexture: letterData.paperTexture,
+      envelopeStyle: letterData.envelopeStyle,
+      signature: letterData.signature ?? null,
+      location: letterData.location,
+      senderCity: senderCity ?? letterData.location,
+      receiverCity,
       sentDate: new Date().toISOString(),
       deliveryDate: deliveryDate.toISOString(),
-      delivered: false
+      delivered: false,
     });
 
     // Store pending row for cron + background delivery scan (LIKE-safe key; no underscores in prefix literal)

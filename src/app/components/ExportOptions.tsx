@@ -46,10 +46,12 @@ export function ExportOptions({ onDownload, onPrint, onSendStart, onLetterSent, 
         body: JSON.stringify({
           recipientEmail,
           recipientName: letterData.recipientName,
+          senderCity: fromCity,
+          receiverCity: toCity,
           letterData: {
             ...letterData,
-            recipientEmail
-          }
+            recipientEmail,
+          },
         }),
       });
 
