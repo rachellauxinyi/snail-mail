@@ -80,29 +80,27 @@ function Star({ x, y, s, d, op }: { x: number; y: number; s: number; d: number; 
 
 function SnailSVG() {
   return (
-    <svg width="160" height="88" viewBox="0 0 160 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 64 Q2 70 8 75 Q34 82 90 80 Q120 79 136 72 Q144 66 136 60 Q122 56 98 58 Q60 60 28 64 Q14 66 6 64Z"
-            fill="#F5F0E8" stroke="#2C2420" strokeWidth="1.4" strokeLinejoin="round"/>
-      <path d="M26 62 Q16 56 14 46 Q12 34 20 24 Q28 14 40 18 Q54 22 56 36 Q58 50 46 60 Q38 66 26 62Z"
-            fill="#F5F0E8" stroke="#2C2420" strokeWidth="1.4" strokeLinejoin="round"/>
-      <circle cx="102" cy="42" r="34" fill="#F8F3EA" stroke="#2C2420" strokeWidth="1.8"/>
-      <circle cx="102" cy="42" r="26" fill="none" stroke="#2C2420" strokeWidth="1.1"/>
-      <circle cx="102" cy="42" r="18" fill="none" stroke="#2C2420" strokeWidth="1.0"/>
-      <circle cx="102" cy="42" r="10" fill="none" stroke="#2C2420" strokeWidth="0.9"/>
-      <circle cx="102" cy="42" r="4"  fill="none" stroke="#2C2420" strokeWidth="0.8"/>
-      <circle cx="102" cy="42" r="2"  fill="#2C2420" opacity="0.45"/>
-      <path d="M102 8 A34 34 0 0 0 68 42" stroke="#2C2420" strokeWidth="0.8" fill="none" opacity="0.5"/>
-      <path d="M102 16 A26 26 0 0 0 76 42" stroke="#2C2420" strokeWidth="0.7" fill="none" opacity="0.4"/>
-      <path d="M30 46 Q38 44 46 46" stroke="#2C2420" strokeWidth="0.7" fill="none" strokeLinecap="round" opacity="0.4"/>
-      <path d="M28 52 Q36 50 44 52" stroke="#2C2420" strokeWidth="0.7" fill="none" strokeLinecap="round" opacity="0.35"/>
-      <path d="M52 76 L52 72" stroke="#2C2420" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
-      <path d="M64 78 L64 73" stroke="#2C2420" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
-      <path d="M76 78 L76 74" stroke="#2C2420" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
-      <path d="M88 77 L88 73" stroke="#2C2420" strokeWidth="0.8" strokeLinecap="round" opacity="0.3"/>
-      <path d="M22 20 C18 10 14 4 10 -2" stroke="#2C2420" strokeWidth="1.2" strokeLinecap="round"/>
-      <circle cx="10" cy="-3" r="2.8" fill="#2C2420"/>
-      <path d="M30 18 C28 10 26 4 24 0" stroke="#2C2420" strokeWidth="1.1" strokeLinecap="round"/>
-      <circle cx="24" cy="-1" r="2.2" fill="#2C2420"/>
+    <svg width="82" height="52" viewBox="0 0 110 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Foot — tapered elongated base */}
+      <path d="M6 48 Q3 54 9 58 Q30 64 68 62 Q86 60 94 53 Q97 47 88 44 Q76 42 56 44 Q32 46 14 48 Q8 48 6 48Z"
+            fill="#F5F0E8" stroke="#3E3831" strokeWidth="1.3" strokeLinejoin="round"/>
+      {/* Upper body / neck */}
+      <path d="M18 46 Q10 38 11 28 Q12 18 20 14 Q30 10 36 18 Q42 26 38 38 Q34 46 22 48Z"
+            fill="#F5F0E8" stroke="#3E3831" strokeWidth="1.3" strokeLinejoin="round"/>
+      {/* Shell — large circle */}
+      <circle cx="68" cy="30" r="26" fill="#FAF6F0" stroke="#3E3831" strokeWidth="1.6"/>
+      {/* Spiral — one arc per turn, offset centers give coiling feel */}
+      <path d="M68 8 A22 22 0 1 0 46.5 42" stroke="#3E3831" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <path d="M68 14 A16 16 0 1 0 52.5 42" stroke="#3E3831" strokeWidth="0.9" fill="none" strokeLinecap="round"/>
+      <path d="M68 20 A10 10 0 1 0 58.5 38" stroke="#3E3831" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
+      <circle cx="68" cy="30" r="3.5" fill="none" stroke="#3E3831" strokeWidth="0.7"/>
+      <circle cx="68" cy="30" r="1.2" fill="#3E3831" opacity="0.5"/>
+      {/* Long antenna */}
+      <path d="M14 14 C11 6 9 1 7 -4" stroke="#3E3831" strokeWidth="1.1" strokeLinecap="round"/>
+      <circle cx="7" cy="-5" r="2" fill="#3E3831"/>
+      {/* Short antenna */}
+      <path d="M21 12 C19 5 17 1 16 -3" stroke="#3E3831" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="16" cy="-4" r="1.6" fill="#3E3831"/>
     </svg>
   );
 }
