@@ -80,7 +80,7 @@ function Star({ x, y, s, d, op }: { x: number; y: number; s: number; d: number; 
 
 function SnailSVG() {
   return (
-    <svg width="82" height="52" viewBox="0 0 110 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="82" height="58" viewBox="0 -10 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Foot — tapered elongated base */}
       <path d="M6 48 Q3 54 9 58 Q30 64 68 62 Q86 60 94 53 Q97 47 88 44 Q76 42 56 44 Q32 46 14 48 Q8 48 6 48Z"
             fill="#F5F0E8" stroke="#3E3831" strokeWidth="1.3" strokeLinejoin="round"/>
