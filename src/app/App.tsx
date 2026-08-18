@@ -4,6 +4,7 @@ import { CustomizationPanel } from './components/CustomizationPanel';
 import { MailPreview } from './components/MailPreview';
 import { ExportOptions } from './components/ExportOptions';
 import { SplashPage, splashStyles } from './components/SplashPage';
+import { LetterView } from './components/LetterView';
 import html2canvas from 'html2canvas';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
@@ -452,89 +453,7 @@ export default function App() {
 
   // Letter view
   if (viewMode.mode === 'view' && viewMode.letterId) {
-    if (letterLoading) {
-      return (
-        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-          <div className="text-center">
-            <h2 className="text-[#3E3831] text-2xl mb-4">Loading your letter...</h2>
-            <p className="text-[#6B6256] italic">📬</p>
-          </div>
-        </div>
-      );
-    }
-
-    if (letterError) {
-      return (
-        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-          <div className="max-w-md text-center bg-[#FEFDFB] border-2 border-[#D4CFC5] p-8">
-            <h2 className="text-[#3E3831] text-2xl mb-4">Oops!</h2>
-            <p className="text-[#6B6256] mb-4">{letterError}</p>
-          </div>
-        </div>
-      );
-    }
-
-    if (!letter) {
-      return (
-        <div className="min-h-screen bg-[#F7F4F0] flex items-center justify-center p-8">
-          <div className="text-center">
-            <p className="text-[#6B6256]">Loading...</p>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="min-h-screen bg-[#F7F4F0] p-8">
-        <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-12">
-            <h1 className="text-[#3E3831] text-3xl mb-3">📬 snail mail</h1>
-            <p className="text-[#6B6256] italic">You've got mail! 💌</p>
-          </header>
-
-          <div className="flex justify-center">
-            <div className="w-full max-w-[500px] bg-[#FFF9F0] border-2 border-[#8B7355] p-8 shadow-lg">
-              <div className="space-y-6">
-                <div className="text-right text-sm text-[#6B6256] italic">
-                  From {letter.location || 'somewhere special'}
-                </div>
-
-                <div className="text-[#3E3831] text-lg mb-4">
-                  Dear {letter.recipientName},
-                </div>
-
-                <div className="text-[#3E3831] whitespace-pre-wrap leading-relaxed">
-                  {letter.letterText || 'A special message just for you...'}
-                </div>
-
-                {letter.signature && (
-                  <div className="mt-12 flex justify-end">
-                    <img src={letter.signature} alt="Signature" className="h-20 w-auto" />
-                  </div>
-                )}
-
-                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#D4CFC5] text-center">
-                  <p className="text-[#6B6256] mb-4 italic">
-                    Want to send a letter back? 💌
-                  </p>
-                  <a
-                    href="https://snail-mail-inky.vercel.app"
-                    className="inline-block px-8 py-4 bg-[#8B7355] text-[#FEFDFB] border-2 border-[#8B7355] hover:bg-[#6B5335] transition-colors text-lg"
-                    onClick={() => sessionStorage.removeItem('snailmail_route')}
-                  >
-                    Create Now!
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-8 text-sm text-[#8B7355] italic">
-            Delivered with love 💕
-          </div>
-        </div>
-      </div>
-    );
+    return <LetterView letterId={viewMode.letterId} />;
   }
 
   // Sending screen
