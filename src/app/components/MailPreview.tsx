@@ -153,21 +153,34 @@ export function MailPreview({
 
     switch (type) {
       case 'stickers':
+        return (
+          <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+            <defs>
+              <filter id="pencil-sticker">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+            <circle cx="14" cy="14" r="7" fill="#E8C568" fillOpacity="0.5" stroke="#C9A840" strokeWidth="1.5" filter="url(#pencil-sticker)"/>
+            <circle cx="27" cy="13" r="5" fill="#E89BA8" fillOpacity="0.5" stroke="#C97080" strokeWidth="1.5" filter="url(#pencil-sticker)"/>
+            <circle cx="20" cy="27" r="6" fill="#9BC9A5" fillOpacity="0.5" stroke="#6BA880" strokeWidth="1.5" filter="url(#pencil-sticker)"/>
+          </svg>
+        );
       case 'stars':
         return (
           <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
             <defs>
-              <filter id={`pencil-${type}`}>
+              <filter id="pencil-stars">
                 <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
                 <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" xChannelSelector="R" yChannelSelector="G"/>
               </filter>
             </defs>
-            <path d="M20 5 L21 18 L20 35 M10 12 L20 20 L30 12 M30 28 L20 20 L10 28"
-                  stroke={color}
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  filter={`url(#pencil-${type})`}
-                  opacity="0.7"/>
+            <path d="M20 5 L22 15 L32 15 L24 22 L27 32 L20 26 L13 32 L16 22 L8 15 L18 15 Z"
+                  stroke="#C9A840" strokeWidth="1.5" fill="#E8C568" fillOpacity="0.4"
+                  filter="url(#pencil-stars)" strokeLinejoin="round"/>
+            <path d="M33 6 L34 10 L38 10 L35 13 L36 17 L33 14 L30 17 L31 13 L28 10 L32 10 Z"
+                  stroke="#C9A840" strokeWidth="1" fill="#E8C568" fillOpacity="0.4"
+                  filter="url(#pencil-stars)" strokeLinejoin="round"/>
           </svg>
         );
       case 'hearts':
