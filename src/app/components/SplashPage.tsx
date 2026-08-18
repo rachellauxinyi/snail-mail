@@ -113,7 +113,7 @@ export function SplashPage({ onEnter }: SplashPageProps) {
       <div
         style={{
           position: 'absolute',
-          top: '50%',
+          top: 'calc(50% - 80px)',
           left: 0,
           animation: 'snailCrawl 10s linear forwards',
           pointerEvents: 'none',
