@@ -185,12 +185,12 @@ export function LetterView({ letterId }: { letterId: string }) {
               </div>
               {/* From label */}
               <div style={{ position: 'absolute', left: 20, top: '42%', transform: 'translateY(-50%)' }}>
-                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 16, color: '#3E3831', letterSpacing: '0.02em' }}>from {fromCity}</div>
+                <div style={{ fontFamily: '"Instrument Serif", serif', fontSize: 16, color: '#3E3831', letterSpacing: '0.02em' }}>from {fromCity}</div>
               </div>
               {/* To label */}
               <div style={{ position: 'absolute', bottom: 14, right: 16, textAlign: 'right' }}>
                 <div style={{ fontFamily: 'monospace', fontSize: 8, color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: 3 }}>TO</div>
-                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 15, color: '#3E3831', letterSpacing: '0.02em' }}>{toName}</div>
+                <div style={{ fontFamily: '"Instrument Serif", serif', fontSize: 15, color: '#3E3831', letterSpacing: '0.02em' }}>{toName}</div>
               </div>
             </div>
 
