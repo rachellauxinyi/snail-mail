@@ -226,7 +226,7 @@ export function LetterView({ letterId }: { letterId: string }) {
               pointerEvents: 'none',
             }}>
               <div style={{
-                width: 'min(90vw, 460px)',
+                width: '260px',
                 maxHeight: letterOpen ? '70vh' : '110px',
                 overflow: 'hidden',
                 background: bgColor,
