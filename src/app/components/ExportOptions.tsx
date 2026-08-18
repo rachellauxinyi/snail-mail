@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { Download, Printer, Mail, Check } from 'lucide-react';
 import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 import { LetterSentAnimation } from './LetterSentAnimation';
+import { estimateDelivery } from '../data/cities';
 
 interface ExportOptionsProps {
   onDownload: () => void;
   onPrint: () => void;
   onSendStart?: () => void;
   onLetterSent?: (letterId: string) => void;
+  fromCity?: string;
+  toCity?: string;
   letterData: {
     recipientName: string;
     letterText: string;
@@ -18,7 +21,7 @@ interface ExportOptionsProps {
   };
 }
 
-export function ExportOptions({ onDownload, onPrint, onSendStart, onLetterSent, letterData }: ExportOptionsProps) {
+export function ExportOptions({ onDownload, onPrint, onSendStart, onLetterSent, fromCity, toCity, letterData }: ExportOptionsProps) {
   const [recipientEmail, setRecipientEmail] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -96,6 +99,14 @@ export function ExportOptions({ onDownload, onPrint, onSendStart, onLetterSent, 
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-[2fr_1fr] gap-6 items-start">
           <div className="space-y-4">
+            {fromCity && toCity && (
+              <div className="flex items-center justify-between px-4 py-3 border-2 border-dashed border-[#D4CFC5] bg-[#F7F4F0] text-sm text-[#6B6256]">
+                <span>{fromCity} → {toCity}</span>
+                {estimateDelivery(fromCity, toCity) && (
+                  <span className="text-[#8B7355]">Est. delivery: {estimateDelivery(fromCity, toCity)}</span>
+                )}
+              </div>
+            )}
             <div>
               <label className="block text-sm text-[#6B6256] mb-2">
                 Recipient's Email Address

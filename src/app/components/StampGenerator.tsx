@@ -15,7 +15,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9A88F',
     keywords: ['paris', 'france'],
     pattern: 'dots',
-    decorativeEmojis: ['🥐', '🍷', '🎨'],
+    decorativeEmojis: ['🥐', '🍷', '🎨', '🌹'],
     greeting: 'Bonjour from'
   },
   toronto: {
@@ -24,7 +24,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['toronto', 'canada'],
     pattern: 'maple',
-    decorativeEmojis: ['🍁', '🏒', '❄️'],
+    decorativeEmojis: ['🍁', '🏒', '❄️', '🏙️'],
     greeting: 'Greetings from'
   },
   newyork: {
@@ -33,7 +33,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['new york', 'nyc', 'manhattan'],
     pattern: 'skyline',
-    decorativeEmojis: ['🍎', '🚕', '🏙️'],
+    decorativeEmojis: ['🍎', '🚕', '🏙️', '🗽'],
     greeting: 'Hello from'
   },
   london: {
@@ -42,7 +42,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['london', 'england', 'uk'],
     pattern: 'union',
-    decorativeEmojis: ['☕', '☂️', '🎩'],
+    decorativeEmojis: ['☕', '☂️', '🎩', '🎡'],
     greeting: 'Cheers from'
   },
   tokyo: {
@@ -51,7 +51,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9A88F',
     keywords: ['tokyo', 'japan'],
     pattern: 'sakura',
-    decorativeEmojis: ['🌸', '🍱', '⛩️'],
+    decorativeEmojis: ['🌸', '🍱', '⛩️', '🗾'],
     greeting: 'こんにちは from'
   },
   sydney: {
@@ -60,7 +60,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['sydney', 'australia'],
     pattern: 'waves',
-    decorativeEmojis: ['🦘', '🏄', '☀️'],
+    decorativeEmojis: ['🦘', '🏄', '☀️', '🦎'],
     greeting: "G'day from"
   },
   dubai: {
@@ -69,7 +69,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['dubai', 'uae'],
     pattern: 'geometric',
-    decorativeEmojis: ['🏜️', '🐪', '💎'],
+    decorativeEmojis: ['🏜️', '🐪', '💎', '🌙'],
     greeting: 'Marhaba from'
   },
   cairo: {
@@ -78,7 +78,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['cairo', 'egypt'],
     pattern: 'hieroglyphs',
-    decorativeEmojis: ['🐫', '☀️', '🏺'],
+    decorativeEmojis: ['🐫', '☀️', '🏺', '🔺'],
     greeting: 'Greetings from'
   },
   rome: {
@@ -87,7 +87,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['rome', 'italy'],
     pattern: 'columns',
-    decorativeEmojis: ['🍝', '🍷', '🏛️'],
+    decorativeEmojis: ['🍝', '🍷', '🏛️', '🛵'],
     greeting: 'Ciao from'
   },
   amsterdam: {
@@ -96,7 +96,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6B8E7F',
     keywords: ['amsterdam', 'netherlands'],
     pattern: 'tulips',
-    decorativeEmojis: ['🌷', '🚲', '🧀'],
+    decorativeEmojis: ['🌷', '🚲', '🧀', '🏘️'],
     greeting: 'Hallo from'
   },
   venice: {
@@ -105,7 +105,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#A8856F',
     keywords: ['venice', 'venezia'],
     pattern: 'waves',
-    decorativeEmojis: ['🛶', '🎭', '🌉'],
+    decorativeEmojis: ['🛶', '🎭', '🌉', '🎪'],
     greeting: 'Ciao from'
   },
   sanfrancisco: {
@@ -114,7 +114,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['san francisco', 'sf', 'golden gate'],
     pattern: 'bridge',
-    decorativeEmojis: ['🌁', '🚃', '🦭'],
+    decorativeEmojis: ['🌁', '🚃', '🦭', '🌉'],
     greeting: 'Hello from'
   },
   losangeles: {
@@ -123,7 +123,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['los angeles', 'la', 'hollywood'],
     pattern: 'stars',
-    decorativeEmojis: ['🌟', '🎥', '🌴'],
+    decorativeEmojis: ['🌟', '🎥', '🌴', '🏖️'],
     greeting: 'Hello from'
   },
   seattle: {
@@ -132,7 +132,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['seattle', 'washington'],
     pattern: 'coffee',
-    decorativeEmojis: ['☕', '🌧️', '🎸'],
+    decorativeEmojis: ['☕', '🌧️', '🎸', '🌲'],
     greeting: 'Greetings from'
   },
   lasvegas: {
@@ -141,7 +141,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['las vegas', 'vegas'],
     pattern: 'neon',
-    decorativeEmojis: ['🎲', '🎰', '✨'],
+    decorativeEmojis: ['🎲', '🎰', '✨', '🌃'],
     greeting: 'Viva'
   },
   miami: {
@@ -150,7 +150,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89B98',
     keywords: ['miami', 'florida'],
     pattern: 'palms',
-    decorativeEmojis: ['🌴', '🏖️', '🍹'],
+    decorativeEmojis: ['🌴', '🏖️', '🍹', '🌊'],
     greeting: 'Hola from'
   },
   hawaii: {
@@ -159,7 +159,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6BC9A5',
     keywords: ['hawaii', 'honolulu'],
     pattern: 'floral',
-    decorativeEmojis: ['🌺', '🏄', '🍍'],
+    decorativeEmojis: ['🌺', '🏄', '🍍', '🌊'],
     greeting: 'Aloha from'
   },
   bali: {
@@ -168,7 +168,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89B68',
     keywords: ['bali', 'indonesia'],
     pattern: 'tropical',
-    decorativeEmojis: ['🌴', '🛕', '🌺'],
+    decorativeEmojis: ['🌴', '🛕', '🌺', '🐒'],
     greeting: 'Greetings from'
   },
   santorini: {
@@ -177,7 +177,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#FFFFFF',
     keywords: ['santorini', 'greece'],
     pattern: 'waves',
-    decorativeEmojis: ['🏖️', '🍋', '⛵'],
+    decorativeEmojis: ['🏖️', '🍋', '⛵', '🌅'],
     greeting: 'Γειά σου from'
   },
   reykjavik: {
@@ -186,7 +186,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#9B8BD5',
     keywords: ['reykjavik', 'iceland'],
     pattern: 'snow',
-    decorativeEmojis: ['❄️', '🌌', '♨️'],
+    decorativeEmojis: ['❄️', '🌌', '♨️', '🐋'],
     greeting: 'Halló from'
   },
   barcelona: {
@@ -195,7 +195,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['barcelona', 'spain'],
     pattern: 'mosaic',
-    decorativeEmojis: ['⚽', '🎨', '🥘'],
+    decorativeEmojis: ['⚽', '🎨', '🥘', '🏟️'],
     greeting: 'Hola from'
   },
   chicago: {
@@ -204,7 +204,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['chicago', 'illinois'],
     pattern: 'skyline',
-    decorativeEmojis: ['🌭', '🎷', '🏀'],
+    decorativeEmojis: ['🌭', '🎷', '🏀', '🌬️'],
     greeting: 'Hello from'
   },
   boston: {
@@ -213,7 +213,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B7B9B',
     keywords: ['boston', 'massachusetts'],
     pattern: 'harbor',
-    decorativeEmojis: ['🦞', '⚾', '🍀'],
+    decorativeEmojis: ['🦞', '⚾', '🍀', '🏛️'],
     greeting: 'Hello from'
   },
   nashville: {
@@ -222,7 +222,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['nashville', 'tennessee'],
     pattern: 'music',
-    decorativeEmojis: ['🎵', '🎤', '🍗'],
+    decorativeEmojis: ['🎵', '🎤', '🍗', '🎸'],
     greeting: 'Howdy from'
   },
   neworleans: {
@@ -231,7 +231,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['new orleans', 'nola', 'louisiana'],
     pattern: 'jazz',
-    decorativeEmojis: ['🎭', '🎺', '⚜️'],
+    decorativeEmojis: ['🎭', '🎺', '⚜️', '🍋'],
     greeting: 'Hello from'
   },
   austin: {
@@ -240,7 +240,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8A568',
     keywords: ['austin', 'texas'],
     pattern: 'western',
-    decorativeEmojis: ['🎸', '🌮', '🦇'],
+    decorativeEmojis: ['🎸', '🌮', '🦇', '🤠'],
     greeting: 'Howdy from'
   },
   portland: {
@@ -249,7 +249,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#8B7355',
     keywords: ['portland', 'oregon'],
     pattern: 'forest',
-    decorativeEmojis: ['☕', '🚲', '🌲'],
+    decorativeEmojis: ['☕', '🚲', '🌲', '🌧️'],
     greeting: 'Hello from'
   },
   denver: {
@@ -258,7 +258,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['denver', 'colorado'],
     pattern: 'mountains',
-    decorativeEmojis: ['⛷️', '🏔️', '☀️'],
+    decorativeEmojis: ['⛷️', '🏔️', '☀️', '🎿'],
     greeting: 'Hello from'
   },
   philadelphia: {
@@ -267,7 +267,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B7B9B',
     keywords: ['philadelphia', 'philly', 'pennsylvania'],
     pattern: 'historic',
-    decorativeEmojis: ['🦅', '🥨', '🏛️'],
+    decorativeEmojis: ['🦅', '🥨', '🏛️', '🔔'],
     greeting: 'Hello from'
   },
   washington: {
@@ -276,7 +276,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['washington dc', 'dc', 'washington'],
     pattern: 'monument',
-    decorativeEmojis: ['🦅', '🏛️', '🌸'],
+    decorativeEmojis: ['🦅', '🏛️', '🌸', '⚖️'],
     greeting: 'Greetings from'
   },
   montreal: {
@@ -285,7 +285,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['montreal', 'quebec'],
     pattern: 'fleur',
-    decorativeEmojis: ['🥖', '🎭', '⚜️'],
+    decorativeEmojis: ['🥖', '🎭', '⚜️', '🍁'],
     greeting: 'Bonjour from'
   },
   vancouver: {
@@ -294,7 +294,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['vancouver', 'british columbia'],
     pattern: 'mountains',
-    decorativeEmojis: ['🌲', '🏔️', '🍁'],
+    decorativeEmojis: ['🌲', '🏔️', '🍁', '🐻'],
     greeting: 'Hello from'
   },
   mexicocity: {
@@ -303,7 +303,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['mexico city', 'cdmx', 'mexico'],
     pattern: 'aztec',
-    decorativeEmojis: ['🌮', '🌺', '🎨'],
+    decorativeEmojis: ['🌮', '🌺', '🎨', '🌵'],
     greeting: 'Hola from'
   },
   havana: {
@@ -312,7 +312,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89B68',
     keywords: ['havana', 'cuba'],
     pattern: 'vintage',
-    decorativeEmojis: ['🎺', '🚗', '🌴'],
+    decorativeEmojis: ['🎺', '🚗', '🌴', '🥃'],
     greeting: 'Hola from'
   },
   lisbon: {
@@ -321,7 +321,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['lisbon', 'portugal'],
     pattern: 'tiles',
-    decorativeEmojis: ['🚃', '🥐', '🌊'],
+    decorativeEmojis: ['🚃', '🥐', '🌊', '🐟'],
     greeting: 'Olá from'
   },
   madrid: {
@@ -330,7 +330,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['madrid', 'spain'],
     pattern: 'royal',
-    decorativeEmojis: ['⚽', '🍷', '🎨'],
+    decorativeEmojis: ['⚽', '🍷', '🎨', '👑'],
     greeting: 'Hola from'
   },
   dublin: {
@@ -339,7 +339,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89B68',
     keywords: ['dublin', 'ireland'],
     pattern: 'celtic',
-    decorativeEmojis: ['☘️', '🍺', '🎻'],
+    decorativeEmojis: ['☘️', '🍺', '🎻', '🏰'],
     greeting: 'Hello from'
   },
   edinburgh: {
@@ -348,7 +348,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#9B6BA8',
     keywords: ['edinburgh', 'scotland'],
     pattern: 'tartan',
-    decorativeEmojis: ['🏰', '🥃', '🎵'],
+    decorativeEmojis: ['🏰', '🥃', '🎵', '🐉'],
     greeting: 'Hello from'
   },
   copenhagen: {
@@ -357,7 +357,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['copenhagen', 'denmark'],
     pattern: 'nordic',
-    decorativeEmojis: ['🚲', '🧜‍♀️', '🥐'],
+    decorativeEmojis: ['🚲', '🧜‍♀️', '🥐', '🌷'],
     greeting: 'Hej from'
   },
   stockholm: {
@@ -366,7 +366,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['stockholm', 'sweden'],
     pattern: 'nordic',
-    decorativeEmojis: ['⛵', '🏰', '☕'],
+    decorativeEmojis: ['⛵', '🏰', '☕', '🫐'],
     greeting: 'Hej from'
   },
   oslo: {
@@ -375,7 +375,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#7B8E7F',
     keywords: ['oslo', 'norway'],
     pattern: 'fjord',
-    decorativeEmojis: ['⛷️', '🏔️', '🐟'],
+    decorativeEmojis: ['⛷️', '🏔️', '🐟', '🌊'],
     greeting: 'Hei from'
   },
   helsinki: {
@@ -384,7 +384,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6B8E7F',
     keywords: ['helsinki', 'finland'],
     pattern: 'aurora',
-    decorativeEmojis: ['❄️', '🌲', '☕'],
+    decorativeEmojis: ['❄️', '🌲', '☕', '🫐'],
     greeting: 'Hei from'
   },
   budapest: {
@@ -393,7 +393,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['budapest', 'hungary'],
     pattern: 'danube',
-    decorativeEmojis: ['🏰', '♨️', '🎻'],
+    decorativeEmojis: ['🏰', '♨️', '🎻', '🌊'],
     greeting: 'Szia from'
   },
   krakow: {
@@ -402,7 +402,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['krakow', 'poland'],
     pattern: 'medieval',
-    decorativeEmojis: ['🏰', '🥟', '🎨'],
+    decorativeEmojis: ['🏰', '🥟', '🎨', '🍺'],
     greeting: 'Cześć from'
   },
   zurich: {
@@ -411,7 +411,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6B8E7F',
     keywords: ['zurich', 'switzerland'],
     pattern: 'alpine',
-    decorativeEmojis: ['⛰️', '🧀', '⌚'],
+    decorativeEmojis: ['⛰️', '🧀', '⌚', '🍫'],
     greeting: 'Grüezi from'
   },
   brussels: {
@@ -420,7 +420,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['brussels', 'belgium'],
     pattern: 'waffles',
-    decorativeEmojis: ['🍫', '🧇', '🍺'],
+    decorativeEmojis: ['🍫', '🧇', '🍺', '💐'],
     greeting: 'Bonjour from'
   },
   munich: {
@@ -429,7 +429,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['munich', 'germany'],
     pattern: 'bavarian',
-    decorativeEmojis: ['🍺', '🥨', '⚽'],
+    decorativeEmojis: ['🍺', '🥨', '⚽', '🎡'],
     greeting: 'Servus from'
   },
   milan: {
@@ -438,7 +438,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['milan', 'italy'],
     pattern: 'fashion',
-    decorativeEmojis: ['👗', '☕', '🎨'],
+    decorativeEmojis: ['👗', '☕', '🎨', '💄'],
     greeting: 'Ciao from'
   },
   florence: {
@@ -447,7 +447,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['florence', 'italy'],
     pattern: 'renaissance',
-    decorativeEmojis: ['🎨', '🍷', '🏛️'],
+    decorativeEmojis: ['🎨', '🍷', '🏛️', '🌺'],
     greeting: 'Ciao from'
   },
   naples: {
@@ -456,7 +456,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['naples', 'italy'],
     pattern: 'vesuvius',
-    decorativeEmojis: ['🍕', '🌋', '🍋'],
+    decorativeEmojis: ['🍕', '🌋', '🍋', '🧆'],
     greeting: 'Ciao from'
   },
   marrakesh: {
@@ -465,7 +465,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['marrakesh', 'marrakech', 'morocco'],
     pattern: 'moroccan',
-    decorativeEmojis: ['🕌', '🐪', '🌴'],
+    decorativeEmojis: ['🕌', '🐪', '🌴', '🏺'],
     greeting: 'Marhaba from'
   },
   capetown: {
@@ -474,7 +474,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['cape town', 'south africa'],
     pattern: 'safari',
-    decorativeEmojis: ['🦁', '🏔️', '🌊'],
+    decorativeEmojis: ['🦁', '🏔️', '🌊', '🌿'],
     greeting: 'Hello from'
   },
   jerusalem: {
@@ -483,7 +483,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['jerusalem', 'israel'],
     pattern: 'ancient',
-    decorativeEmojis: ['🕌', '🕊️', '🏛️'],
+    decorativeEmojis: ['🕌', '🕊️', '🏛️', '⭐'],
     greeting: 'Shalom from'
   },
   bangkok: {
@@ -492,7 +492,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['bangkok', 'thailand'],
     pattern: 'temple',
-    decorativeEmojis: ['🛕', '🍜', '🐘'],
+    decorativeEmojis: ['🛕', '🍜', '🐘', '🛺'],
     greeting: 'Sawasdee from'
   },
   hanoi: {
@@ -501,7 +501,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['hanoi', 'vietnam'],
     pattern: 'pagoda',
-    decorativeEmojis: ['🏯', '🍜', '🏍️'],
+    decorativeEmojis: ['🏯', '🍜', '🏍️', '🌿'],
     greeting: 'Xin chào from'
   },
   seoul: {
@@ -510,7 +510,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['seoul', 'korea', 'south korea'],
     pattern: 'hanbok',
-    decorativeEmojis: ['🏯', '🍜', '💜'],
+    decorativeEmojis: ['🏯', '🍜', '💜', '🌸'],
     greeting: 'Annyeong from'
   },
   osaka: {
@@ -519,7 +519,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['osaka', 'japan'],
     pattern: 'castle',
-    decorativeEmojis: ['🏯', '🍜', '🎌'],
+    decorativeEmojis: ['🏯', '🍜', '🎌', '🐙'],
     greeting: 'Konnichiwa from'
   },
   kyoto: {
@@ -528,7 +528,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89BA8',
     keywords: ['kyoto', 'japan'],
     pattern: 'shrine',
-    decorativeEmojis: ['⛩️', '🌸', '🍵'],
+    decorativeEmojis: ['⛩️', '🌸', '🍵', '🦊'],
     greeting: 'Konnichiwa from'
   },
   shanghai: {
@@ -537,7 +537,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['shanghai', 'china'],
     pattern: 'skyline',
-    decorativeEmojis: ['🏙️', '🥟', '🐉'],
+    decorativeEmojis: ['🏙️', '🥟', '🐉', '🏮'],
     greeting: 'Nǐ hǎo from'
   },
   mumbai: {
@@ -546,7 +546,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['mumbai', 'bombay', 'india'],
     pattern: 'bollywood',
-    decorativeEmojis: ['🛕', '🎬', '🍛'],
+    decorativeEmojis: ['🛕', '🎬', '🍛', '🌺'],
     greeting: 'Namaste from'
   },
   delhi: {
@@ -555,7 +555,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#C9554F',
     keywords: ['delhi', 'new delhi', 'india'],
     pattern: 'mogul',
-    decorativeEmojis: ['🕌', '🍛', '🐘'],
+    decorativeEmojis: ['🕌', '🍛', '🐘', '🌶️'],
     greeting: 'Namaste from'
   },
   riodejaneiro: {
@@ -564,7 +564,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E8C568',
     keywords: ['rio de janeiro', 'rio', 'brazil'],
     pattern: 'carnival',
-    decorativeEmojis: ['⛰️', '⚽', '🎭'],
+    decorativeEmojis: ['⛰️', '⚽', '🎭', '🌴'],
     greeting: 'Olá from'
   },
   buenosaires: {
@@ -573,7 +573,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B7B9B',
     keywords: ['buenos aires', 'argentina'],
     pattern: 'tango',
-    decorativeEmojis: ['💃', '🥩', '⚽'],
+    decorativeEmojis: ['💃', '🥩', '⚽', '🌹'],
     greeting: 'Hola from'
   },
   lima: {
@@ -582,7 +582,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6B8E7F',
     keywords: ['lima', 'peru'],
     pattern: 'incan',
-    decorativeEmojis: ['🏔️', '🦙', '🌶️'],
+    decorativeEmojis: ['🏔️', '🦙', '🌶️', '🌽'],
     greeting: 'Hola from'
   },
   bogota: {
@@ -591,7 +591,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#6B8E7F',
     keywords: ['bogota', 'colombia'],
     pattern: 'coffee',
-    decorativeEmojis: ['☕', '🌺', '🦜'],
+    decorativeEmojis: ['☕', '🌺', '🦜', '🎺'],
     greeting: 'Hola from'
   },
   auckland: {
@@ -600,7 +600,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#5B9BD5',
     keywords: ['auckland', 'new zealand'],
     pattern: 'maori',
-    decorativeEmojis: ['🌋', '🥝', '⛵'],
+    decorativeEmojis: ['🌋', '🥝', '⛵', '🐑'],
     greeting: 'Kia ora from'
   },
   fiji: {
@@ -609,7 +609,7 @@ const locations: Record<string, LocationTheme> = {
     accentColor: '#E89BA8',
     keywords: ['fiji', 'suva'],
     pattern: 'tropical',
-    decorativeEmojis: ['🏝️', '🌺', '🥥'],
+    decorativeEmojis: ['🏝️', '🌺', '🥥', '🐠'],
     greeting: 'Bula from'
   },
 };
