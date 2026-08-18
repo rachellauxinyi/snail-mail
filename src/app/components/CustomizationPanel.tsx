@@ -33,6 +33,15 @@ function CityAutocomplete({ value, onChange, placeholder }: {
         value={value}
         onChange={(e) => { onChange(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && suggestions.length > 0) {
+            e.preventDefault();
+            onChange(suggestions[0]);
+            setOpen(false);
+          } else if (e.key === 'Escape') {
+            setOpen(false);
+          }
+        }}
         placeholder={placeholder}
         className="w-full px-4 py-3 border-2 border-[#D4CFC5] bg-[#FEFDFB] text-[#3E3831] placeholder:text-[#6B6256]/50 focus:border-[#8B7355] focus:outline-none transition-colors"
       />

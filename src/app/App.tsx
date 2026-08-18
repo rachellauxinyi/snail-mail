@@ -318,17 +318,28 @@ export default function App() {
           <style>{psStarPulseStyle}</style>
           <StarBg />
           <div className="relative z-10 flex flex-col items-center gap-5 text-center px-8 max-w-md">
-            {/* Envelope with teal checkmark — same as success screen */}
-            <svg width="110" height="90" viewBox="0 0 110 90" fill="none">
-              <rect x="5" y="24" width="80" height="56" rx="2" fill="#FAF6F0"/>
-              <rect x="26" y="8" width="38" height="44" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-              <line x1="32" y1="15" x2="58" y2="15" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-              <line x1="32" y1="21" x2="58" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-              <rect x="6" y="28" width="78" height="51" fill="#FAF6F0"/>
-              <rect x="5" y="24" width="80" height="56" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
-              <path d="M5 24 L45 54 L85 24" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-              <circle cx="76" cy="68" r="14" fill="#5B9E8A"/>
-              <path d="M69 68 L74 73.5 L83 62" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* Envelope with teal checkmark — open flap, letter on top */}
+            <svg width="110" height="96" viewBox="0 0 110 96" fill="none">
+              {/* Open flap (folded back, pointing up) — behind letter */}
+              <path d="M5 32 L45 10 L85 32" fill="#EDE7DC" stroke="#A89478" strokeWidth="1.2" strokeLinejoin="round"/>
+              {/* Envelope body */}
+              <rect x="5" y="32" width="80" height="52" rx="2" fill="#FAF6F0"/>
+              {/* Letter paper — on top of flap */}
+              <rect x="26" y="4" width="38" height="46" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+              <line x1="32" y1="13" x2="58" y2="13" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="20" x2="58" y2="20" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              <line x1="32" y1="27" x2="52" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+              {/* Cover rect hides letter inside envelope body */}
+              <rect x="6" y="36" width="78" height="47" fill="#FAF6F0"/>
+              {/* Envelope outline */}
+              <rect x="5" y="32" width="80" height="52" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
+              {/* Inner bottom fold diamond */}
+              <path d="M5 84 L45 58 L85 84" stroke="#C4BAB0" strokeWidth="1" fill="none"/>
+              <path d="M5 32 L45 58" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+              <path d="M85 32 L45 58" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+              {/* Teal checkmark */}
+              <circle cx="76" cy="74" r="14" fill="#5B9E8A"/>
+              <path d="M69 74 L74 79.5 L83 68" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2rem', color: '#3E3831', letterSpacing: '0.02em', lineHeight: 1.2 }}>
               Your letter has arrived!
@@ -362,18 +373,28 @@ export default function App() {
         <style>{psStarPulseStyle}</style>
         <StarBg />
         <div className="relative z-10 flex flex-col items-center gap-5 text-center px-8 max-w-md">
-          {/* Envelope with motion lines */}
-          <svg width="130" height="96" viewBox="0 0 130 96" fill="none">
-            <rect x="5" y="18" width="96" height="64" rx="2" fill="#FAF6F0"/>
-            <rect x="32" y="2" width="42" height="46" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-            <line x1="38" y1="10" x2="68" y2="10" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="17" x2="68" y2="17" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="24" x2="62" y2="24" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <rect x="6" y="22" width="94" height="59" fill="#FAF6F0"/>
-            <rect x="5" y="18" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
-            <path d="M5 18 L53 54 L101 18" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-            <line x1="110" y1="42" x2="124" y2="42" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
-            <line x1="113" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
+          {/* Envelope with motion lines — open flap */}
+          <svg width="130" height="104" viewBox="0 0 130 104" fill="none">
+            {/* Open flap (behind letter) */}
+            <path d="M5 28 L53 4 L101 28" fill="#EDE7DC" stroke="#A89478" strokeWidth="1.2" strokeLinejoin="round"/>
+            {/* Envelope body */}
+            <rect x="5" y="28" width="96" height="64" rx="2" fill="#FAF6F0"/>
+            {/* Letter paper on top of flap */}
+            <rect x="32" y="4" width="42" height="48" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="38" y1="13" x2="68" y2="13" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="21" x2="68" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="29" x2="62" y2="29" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            {/* Cover rect hides letter inside envelope */}
+            <rect x="6" y="32" width="94" height="59" fill="#FAF6F0"/>
+            {/* Envelope outline */}
+            <rect x="5" y="28" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
+            {/* Inner bottom fold diamond */}
+            <path d="M5 92 L53 64 L101 92" stroke="#C4BAB0" strokeWidth="1" fill="none"/>
+            <path d="M5 28 L53 64" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+            <path d="M101 28 L53 64" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+            {/* Motion lines */}
+            <line x1="110" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+            <line x1="113" y1="62" x2="124" y2="62" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
           </svg>
 
           <div>
@@ -515,23 +536,27 @@ export default function App() {
         <style>{psStarPulseStyle}</style>
         <StarBg />
         <div className="relative z-10 flex flex-col items-center gap-6">
-          <svg width="130" height="96" viewBox="0 0 130 96" fill="none">
-            {/* Envelope body (back, no stroke yet) */}
-            <rect x="5" y="18" width="96" height="64" rx="2" fill="#FAF6F0"/>
-            {/* Letter peeking out from top */}
-            <rect x="32" y="2" width="42" height="46" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-            <line x1="38" y1="10" x2="68" y2="10" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="17" x2="68" y2="17" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="38" y1="24" x2="62" y2="24" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            {/* Cover rect hides bottom of letter */}
-            <rect x="6" y="22" width="94" height="59" fill="#FAF6F0"/>
-            {/* Envelope outline on top */}
-            <rect x="5" y="18" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
-            {/* Envelope flap V */}
-            <path d="M5 18 L53 54 L101 18" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+          <svg width="130" height="104" viewBox="0 0 130 104" fill="none">
+            {/* Open flap (behind letter) */}
+            <path d="M5 28 L53 4 L101 28" fill="#EDE7DC" stroke="#A89478" strokeWidth="1.2" strokeLinejoin="round"/>
+            {/* Envelope body */}
+            <rect x="5" y="28" width="96" height="64" rx="2" fill="#FAF6F0"/>
+            {/* Letter paper on top of flap */}
+            <rect x="32" y="4" width="42" height="48" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="38" y1="13" x2="68" y2="13" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="21" x2="68" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="38" y1="29" x2="62" y2="29" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            {/* Cover rect hides letter inside envelope */}
+            <rect x="6" y="32" width="94" height="59" fill="#FAF6F0"/>
+            {/* Envelope outline */}
+            <rect x="5" y="28" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
+            {/* Inner bottom fold diamond */}
+            <path d="M5 92 L53 64 L101 92" stroke="#C4BAB0" strokeWidth="1" fill="none"/>
+            <path d="M5 28 L53 64" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+            <path d="M101 28 L53 64" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
             {/* Motion lines */}
-            <line x1="110" y1="42" x2="124" y2="42" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
-            <line x1="113" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
+            <line x1="110" y1="52" x2="124" y2="52" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+            <line x1="113" y1="62" x2="124" y2="62" stroke="#A89478" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
           </svg>
 
           <div className="flex flex-col items-center gap-3">
@@ -556,23 +581,28 @@ export default function App() {
         <style>{psStarPulseStyle}</style>
         <StarBg />
         <div className="relative z-10 flex flex-col items-center gap-5 text-center px-8 max-w-md">
-          {/* Envelope with teal checkmark circle */}
-          <svg width="110" height="90" viewBox="0 0 110 90" fill="none">
-            {/* Envelope body (back) */}
-            <rect x="5" y="24" width="80" height="56" rx="2" fill="#FAF6F0"/>
-            {/* Letter peeking out from top */}
-            <rect x="26" y="8" width="38" height="44" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
-            <line x1="32" y1="15" x2="58" y2="15" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            <line x1="32" y1="21" x2="58" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
-            {/* Cover rect hides bottom of letter */}
-            <rect x="6" y="28" width="78" height="51" fill="#FAF6F0"/>
-            {/* Envelope outline on top */}
-            <rect x="5" y="24" width="80" height="56" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
-            {/* Envelope flap V */}
-            <path d="M5 24 L45 54 L85 24" stroke="#A89478" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-            {/* Teal checkmark circle — bottom right of envelope */}
-            <circle cx="76" cy="68" r="14" fill="#5B9E8A"/>
-            <path d="M69 68 L74 73.5 L83 62" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          {/* Envelope with teal checkmark circle — open flap */}
+          <svg width="110" height="96" viewBox="0 0 110 96" fill="none">
+            {/* Open flap (behind letter) */}
+            <path d="M5 32 L45 10 L85 32" fill="#EDE7DC" stroke="#A89478" strokeWidth="1.2" strokeLinejoin="round"/>
+            {/* Envelope body */}
+            <rect x="5" y="32" width="80" height="52" rx="2" fill="#FAF6F0"/>
+            {/* Letter paper on top of flap */}
+            <rect x="26" y="4" width="38" height="46" rx="1" fill="#FEFDFB" stroke="#A89478" strokeWidth="1.2"/>
+            <line x1="32" y1="13" x2="58" y2="13" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="32" y1="20" x2="58" y2="20" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            <line x1="32" y1="27" x2="52" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
+            {/* Cover rect hides letter inside envelope */}
+            <rect x="6" y="36" width="78" height="47" fill="#FAF6F0"/>
+            {/* Envelope outline */}
+            <rect x="5" y="32" width="80" height="52" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
+            {/* Inner bottom fold diamond */}
+            <path d="M5 84 L45 58 L85 84" stroke="#C4BAB0" strokeWidth="1" fill="none"/>
+            <path d="M5 32 L45 58" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+            <path d="M85 32 L45 58" stroke="#C4BAB0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+            {/* Teal checkmark */}
+            <circle cx="76" cy="74" r="14" fill="#5B9E8A"/>
+            <path d="M69 74 L74 79.5 L83 68" stroke="#FEFDFB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
 
           <h2 style={{ fontFamily: '"Instrument Serif", serif', fontSize: '2rem', color: '#3E3831', letterSpacing: '0.02em', lineHeight: 1.2 }}>
