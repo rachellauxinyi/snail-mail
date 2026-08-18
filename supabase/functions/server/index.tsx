@@ -15,6 +15,8 @@ async function runProcessDeliveries(): Promise<{
   if (!resendApiKey) {
     throw new Error("RESEND_API_KEY environment variable is not set");
   }
+  const fromEmail = Deno.env.get("RESEND_FROM_EMAIL") || "onboarding@resend.dev";
+  const fromAddress = `Snail Mail <${fromEmail}>`;
 
   const allPending = await kv.getByPrefix(PENDING_PREFIX);
   const now = new Date();
@@ -53,7 +55,7 @@ async function runProcessDeliveries(): Promise<{
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Snail Mail <onboarding@resend.dev>",
+          from: fromAddress,
           to: [recipientEmail],
           subject: "📬 Your letter has arrived!",
           html: `
@@ -158,6 +160,8 @@ app.post("/make-server-4ba6ddf6/send-email", async (c) => {
       console.log('Error: RESEND_API_KEY environment variable is not set');
       return c.json({ error: 'Email service not configured' }, 500);
     }
+    const fromEmail = Deno.env.get('RESEND_FROM_EMAIL') || 'onboarding@resend.dev';
+    const fromAddress = `Snail Mail <${fromEmail}>`;
 
     // Send email using Resend API
     const response = await fetch('https://api.resend.com/emails', {
@@ -167,7 +171,7 @@ app.post("/make-server-4ba6ddf6/send-email", async (c) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Snail Mail <onboarding@resend.dev>',
+        from: fromAddress,
         to: [recipientEmail],
         subject: '💌 You have mail on the way!',
         html: `
