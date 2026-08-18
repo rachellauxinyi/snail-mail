@@ -109,22 +109,24 @@ export function SplashPage({ onEnter }: SplashPageProps) {
     >
       <style>{splashStyles}</style>
 
-      {/* Crawling snail */}
+      {/* Crawling snail — outer handles horizontal crawl, inner handles vertical centering */}
       <div
         style={{
           position: 'absolute',
           top: '50%',
           left: 0,
-          transform: 'translateY(-50%)',
           animation: 'snailCrawl 10s linear forwards',
           pointerEvents: 'none',
+          zIndex: 20,
         }}
       >
-        <div style={{ animation: 'snailDrag 1.4s ease-in-out infinite' }}>
-          <div style={{ animation: 'shellSway 2.2s ease-in-out infinite', transformOrigin: 'center bottom' }}>
-            {/* scaleX(-1) flips to face right */}
-            <div style={{ transform: 'scaleX(-1)' }}>
-              <SnailSVG />
+        {/* Separate div so translateY(-50%) isn't overridden by the crawl animation */}
+        <div style={{ transform: 'translateY(-50%)' }}>
+          <div style={{ animation: 'snailDrag 1.4s ease-in-out infinite' }}>
+            <div style={{ animation: 'shellSway 2.2s ease-in-out infinite', transformOrigin: 'center bottom' }}>
+              <div style={{ transform: 'scaleX(-1)' }}>
+                <SnailSVG />
+              </div>
             </div>
           </div>
         </div>
