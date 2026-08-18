@@ -3,6 +3,7 @@ import { Lock, MailOpen } from 'lucide-react';
 import { CustomizationPanel } from './components/CustomizationPanel';
 import { MailPreview } from './components/MailPreview';
 import { ExportOptions } from './components/ExportOptions';
+import { SplashPage, splashStyles } from './components/SplashPage';
 import html2canvas from 'html2canvas';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
@@ -66,7 +67,14 @@ function generateStampData(letterId: string, location?: string): { from: string;
 }
 
 export default function App() {
-  const [viewMode, setViewMode] = useState<{ mode: 'create' | 'tracker' | 'view'; letterId?: string }>(getInitialViewMode);
+  const initialMode = getInitialViewMode();
+  // Only show splash on the landing page (not when following a tracker/view deep link)
+  const [showSplash, setShowSplash] = useState(
+    initialMode.mode === 'create' && !sessionStorage.getItem('snailmail_splash_seen')
+  );
+  const [bentoVisible, setBentoVisible] = useState(!showSplash);
+
+  const [viewMode, setViewMode] = useState<{ mode: 'create' | 'tracker' | 'view'; letterId?: string }>(initialMode);
   const [senderView, setSenderView] = useState<'compose' | 'sending' | 'success'>('compose');
   const [sentLetterId, setSentLetterId] = useState<string | null>(null);
 
@@ -636,14 +644,29 @@ export default function App() {
   // Create / compose mode
   return (
     <div className="min-h-screen bg-[#F7F4F0] p-8 relative">
+      <style>{splashStyles}</style>
+      {showSplash && (
+        <SplashPage onEnter={() => {
+          sessionStorage.setItem('snailmail_splash_seen', '1');
+          setShowSplash(false);
+          // Small delay then trigger bento entrance
+          setTimeout(() => setBentoVisible(true), 50);
+        }} />
+      )}
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 30m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0' fill='%23000000'/%3E%3C/svg%3E")`,
         backgroundSize: '60px 60px'
       }} />
 
-      <div className="max-w-7xl mx-auto relative">
-        <header className="text-center mb-12 relative">
+      <div
+        className="max-w-7xl mx-auto relative"
+        style={{
+          opacity: bentoVisible ? 1 : 0,
+          transition: bentoVisible ? 'opacity 0.3s ease-out' : 'none',
+        }}
+      >
+        <header className="text-center mb-12 relative" style={bentoVisible ? { animation: 'bentoIn 0.5s cubic-bezier(0.34,1.2,0.64,1) 0.05s both' } : {}}>
           <div className="flex items-center justify-center gap-4 mb-3 relative">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="absolute -top-6 left-32 opacity-40">
               <path d="M9 2 L10 8 L9 14 M5 6 L9 9 L13 6 M13 12 L9 9 L5 12" stroke="#8B7355" strokeWidth="1.5" strokeLinecap="round"/>
@@ -705,7 +728,7 @@ export default function App() {
         </header>
 
         <div className="flex flex-col lg:grid lg:grid-cols-[1fr_2fr] gap-8 mb-8">
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:order-1" style={bentoVisible ? { animation: 'bentoIn 0.5s cubic-bezier(0.34,1.2,0.64,1) 0.18s both' } : {}}>
             <div className="sticky top-8">
             <CustomizationPanel
               paperTexture={paperTexture}
@@ -732,7 +755,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-4 lg:p-8 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] flex flex-col order-1 lg:order-2">
+          <div className="bg-[#FEFDFB] border-2 border-[#D4CFC5] p-4 lg:p-8 shadow-[4px_4px_0px_0px_rgba(139,115,85,0.1)] flex flex-col order-1 lg:order-2" style={bentoVisible ? { animation: 'bentoIn 0.5s cubic-bezier(0.34,1.2,0.64,1) 0.32s both' } : {}}>
             <h2 className="text-center mb-4 lg:mb-6 text-[#3E3831] tracking-wide uppercase text-sm border-b-2 border-dashed border-[#D4CFC5] pb-2">Preview</h2>
             <div ref={previewRef} className="flex-1">
               <MailPreview
@@ -756,7 +779,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8" style={bentoVisible ? { animation: 'bentoIn 0.5s cubic-bezier(0.34,1.2,0.64,1) 0.46s both' } : {}}>
           <ExportOptions
             onDownload={handleDownload}
             onPrint={handlePrint}
