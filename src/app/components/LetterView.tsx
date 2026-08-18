@@ -172,11 +172,12 @@ export function LetterView({ letterId }: { letterId: string }) {
               borderRadius: 4,
               overflow: 'hidden',
             }}>
-              {/* Envelope fold triangles */}
+              {/* Envelope fold triangles — all meeting at exact center */}
               <div style={{ position: 'absolute', inset: 0 }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49840', clipPath: 'polygon(0 0, 100% 0, 50% 42%)' }} />
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49820', clipPath: 'polygon(0 0, 0 100%, 44% 50%)' }} />
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49820', clipPath: 'polygon(100% 0, 100% 100%, 56% 50%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: '#C4B49842', clipPath: 'polygon(0 0, 100% 0, 50% 50%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: '#C4B49822', clipPath: 'polygon(0 0, 0 100%, 50% 50%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: '#C4B49822', clipPath: 'polygon(100% 0, 100% 100%, 50% 50%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: '#C4B49818', clipPath: 'polygon(0 100%, 100% 100%, 50% 50%)' }} />
               </div>
               {/* Stamp placeholder */}
               <div style={{ position: 'absolute', top: 10, right: 10, width: 44, height: 52, background: 'linear-gradient(135deg,#F5E8D8,#E8D8C8)', border: '2px solid #FEFDFB', boxShadow: '0 1px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
@@ -184,12 +185,12 @@ export function LetterView({ letterId }: { letterId: string }) {
               </div>
               {/* From label */}
               <div style={{ position: 'absolute', left: 20, top: '42%', transform: 'translateY(-50%)' }}>
-                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 15, color: '#3E3831' }}>from {fromCity}</div>
+                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 16, color: '#3E3831', letterSpacing: '0.02em' }}>from {fromCity}</div>
               </div>
               {/* To label */}
-              <div style={{ position: 'absolute', bottom: 12, right: 14, textAlign: 'right' }}>
-                <div style={{ fontSize: 8, color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 2 }}>TO</div>
-                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 13, color: '#3E3831' }}>{toName}</div>
+              <div style={{ position: 'absolute', bottom: 14, right: 16, textAlign: 'right' }}>
+                <div style={{ fontFamily: 'monospace', fontSize: 8, color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: 3 }}>TO</div>
+                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 15, color: '#3E3831', letterSpacing: '0.02em' }}>{toName}</div>
               </div>
             </div>
 
