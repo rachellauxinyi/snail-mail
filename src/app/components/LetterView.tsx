@@ -33,8 +33,7 @@ function StarBurst({ visible }: { visible: boolean }) {
 const styles = `
 @keyframes letterStarPulse { 0%,100%{transform:scale(1) rotate(0deg);opacity:0.6} 50%{transform:scale(1.3) rotate(15deg);opacity:1} }
 @keyframes envAppear { from{transform:scale(0.7) translateY(30px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
-@keyframes letterSlideUp { from{transform:translateY(0)} to{transform:translateY(-120px)} }
-@keyframes letterUnfold { from{transform:scaleY(0.4) translateY(60px);transform-origin:top;opacity:0} to{transform:scaleY(1) translateY(0);transform-origin:top;opacity:1} }
+@keyframes letterPop { from{opacity:0;transform:scale(0.85) translateY(12px)} to{opacity:1;transform:scale(1) translateY(0)} }
 `;
 
 export function LetterView({ letterId }: { letterId: string }) {
@@ -81,8 +80,8 @@ export function LetterView({ letterId }: { letterId: string }) {
       setPhase('unfolding');
       setTimeout(() => {
         setLetterOpen(true);
-        setTimeout(() => setPhase('reading'), 700);
-      }, 600);
+        setTimeout(() => setPhase('reading'), 800);
+      }, 350);
     }
   };
 
@@ -175,9 +174,9 @@ export function LetterView({ letterId }: { letterId: string }) {
             }}>
               {/* Envelope fold triangles */}
               <div style={{ position: 'absolute', inset: 0 }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#A8947808', clipPath: 'polygon(0 0, 100% 0, 50% 42%)' }} />
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#A8947805', clipPath: 'polygon(0 0, 0 100%, 44% 50%)' }} />
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#A8947805', clipPath: 'polygon(100% 0, 100% 100%, 56% 50%)' }} />
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49840', clipPath: 'polygon(0 0, 100% 0, 50% 42%)' }} />
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49820', clipPath: 'polygon(0 0, 0 100%, 44% 50%)' }} />
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#C4B49820', clipPath: 'polygon(100% 0, 100% 100%, 56% 50%)' }} />
               </div>
               {/* Stamp placeholder */}
               <div style={{ position: 'absolute', top: 10, right: 10, width: 44, height: 52, background: 'linear-gradient(135deg,#F5E8D8,#E8D8C8)', border: '2px solid #FEFDFB', boxShadow: '0 1px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>
@@ -214,26 +213,33 @@ export function LetterView({ letterId }: { letterId: string }) {
             </div>
           </div>
 
-          {/* Letter sliding out (visible when unfolding) */}
+          {/* Letter overlay — fixed center, expands downward then transitions to reading */}
           {letterOut && (
             <div style={{
-              position: 'absolute',
-              left: '50%', bottom: '50%',
-              transform: `translateX(-50%) translateY(${letterOpen ? '-160px' : '0px'})`,
-              transition: 'transform 0.5s ease-out',
-              width: 260,
-              background: bgColor,
-              border: '1.5px solid #D4CFC5',
-              borderRadius: 2,
-              padding: '16px 20px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-              zIndex: 10,
-              transformOrigin: 'bottom center',
-              animation: letterOpen ? 'letterUnfold 0.6s cubic-bezier(0.34,1.2,0.64,1) forwards' : 'none',
+              position: 'fixed',
+              top: 0, left: 0, right: 0, bottom: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 50,
+              pointerEvents: 'none',
             }}>
-              <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 13, color: '#6B6256', marginBottom: 10 }}>Dear {toName},</div>
-              <div style={{ color: '#3E3831', fontSize: 13, lineHeight: 1.6, fontFamily: 'serif' }}>
-                {(letter?.letterText || '').slice(0, 80)}{(letter?.letterText || '').length > 80 ? '…' : ''}
+              <div style={{
+                width: 'min(90vw, 460px)',
+                maxHeight: letterOpen ? '70vh' : '110px',
+                overflow: 'hidden',
+                background: bgColor,
+                border: '1.5px solid #D4CFC5',
+                borderRadius: 2,
+                padding: '20px 24px',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.18)',
+                transition: 'max-height 0.65s cubic-bezier(0.4,0,0.2,1)',
+                animation: 'letterPop 0.35s cubic-bezier(0.34,1.2,0.64,1) both',
+              }}>
+                <div style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontSize: 14, color: '#6B6256', marginBottom: 12 }}>Dear {toName},</div>
+                <div style={{ color: '#3E3831', fontSize: 13, lineHeight: 1.65, fontFamily: 'serif' }}>
+                  {(letter?.letterText || '').slice(0, 200)}{(letter?.letterText || '').length > 200 ? '…' : ''}
+                </div>
               </div>
             </div>
           )}
