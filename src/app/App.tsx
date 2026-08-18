@@ -338,7 +338,7 @@ export default function App() {
               <line x1="32" y1="20" x2="58" y2="20" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
               <line x1="32" y1="27" x2="52" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
               {/* Cover rect hides letter inside envelope body */}
-              <rect x="6" y="36" width="78" height="47" fill="#FAF6F0"/>
+              <rect x="6" y="32" width="78" height="51" fill="#FAF6F0"/>
               {/* Envelope outline */}
               <rect x="5" y="32" width="80" height="52" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
               {/* Inner bottom fold diamond */}
@@ -393,7 +393,7 @@ export default function App() {
             <line x1="38" y1="21" x2="68" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             <line x1="38" y1="29" x2="62" y2="29" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             {/* Cover rect hides letter inside envelope */}
-            <rect x="6" y="32" width="94" height="59" fill="#FAF6F0"/>
+            <rect x="6" y="28" width="94" height="63" fill="#FAF6F0"/>
             {/* Envelope outline */}
             <rect x="5" y="28" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
             {/* Inner bottom fold diamond */}
@@ -555,7 +555,7 @@ export default function App() {
             <line x1="38" y1="21" x2="68" y2="21" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             <line x1="38" y1="29" x2="62" y2="29" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             {/* Cover rect hides letter inside envelope */}
-            <rect x="6" y="32" width="94" height="59" fill="#FAF6F0"/>
+            <rect x="6" y="28" width="94" height="63" fill="#FAF6F0"/>
             {/* Envelope outline */}
             <rect x="5" y="28" width="96" height="64" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
             {/* Inner bottom fold diamond */}
@@ -601,7 +601,7 @@ export default function App() {
             <line x1="32" y1="20" x2="58" y2="20" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             <line x1="32" y1="27" x2="52" y2="27" stroke="#C4BAB0" strokeWidth="1" strokeLinecap="round"/>
             {/* Cover rect hides letter inside envelope */}
-            <rect x="6" y="36" width="78" height="47" fill="#FAF6F0"/>
+            <rect x="6" y="32" width="78" height="51" fill="#FAF6F0"/>
             {/* Envelope outline */}
             <rect x="5" y="32" width="80" height="52" rx="2" fill="none" stroke="#A89478" strokeWidth="1.5"/>
             {/* Inner bottom fold diamond */}
