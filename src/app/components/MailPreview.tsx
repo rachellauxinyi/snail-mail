@@ -473,7 +473,7 @@ export function MailPreview({
               onChange={(e) => setRecipientName?.(e.target.value)}
               placeholder="Recipient name..."
               className="text-right font-serif italic text-sm bg-transparent border-b border-dashed border-[#3E3831]/20 focus:border-[#3E3831]/50 focus:outline-none px-1 py-0.5 max-w-[140px]"
-              style={{ color: stampData.accentColor }}
+              style={{ color: stampData.color }}
             />
           </div>
         </div>
