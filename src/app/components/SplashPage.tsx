@@ -80,27 +80,29 @@ function Star({ x, y, s, d, op }: { x: number; y: number; s: number; d: number; 
 
 function SnailSVG() {
   return (
-    <svg width="82" height="58" viewBox="0 -10 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="82" height="58" viewBox="0 -12 110 82" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Foot — tapered elongated base */}
-      <path d="M6 48 Q3 54 9 58 Q30 64 68 62 Q86 60 94 53 Q97 47 88 44 Q76 42 56 44 Q32 46 14 48 Q8 48 6 48Z"
+      <path d="M6 48 Q3 54 10 58 Q32 64 68 62 Q86 60 94 52 Q97 46 86 43 Q74 41 54 43 Q28 46 12 48 Q6 48 6 48Z"
             fill="#F5F0E8" stroke="#3E3831" strokeWidth="1.3" strokeLinejoin="round"/>
-      {/* Upper body / neck */}
-      <path d="M18 46 Q10 38 11 28 Q12 18 20 14 Q30 10 36 18 Q42 26 38 38 Q34 46 22 48Z"
+      {/* Head / neck — smooth rounded shape on the left */}
+      <path d="M14 44 Q6 38 7 28 Q8 18 18 14 Q28 10 34 20 Q40 30 34 42 Q28 48 18 46 Q14 46 14 44Z"
             fill="#F5F0E8" stroke="#3E3831" strokeWidth="1.3" strokeLinejoin="round"/>
-      {/* Shell — large circle */}
-      <circle cx="68" cy="30" r="26" fill="#FAF6F0" stroke="#3E3831" strokeWidth="1.6"/>
-      {/* Spiral — one arc per turn, offset centers give coiling feel */}
-      <path d="M68 8 A22 22 0 1 0 46.5 42" stroke="#3E3831" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <path d="M68 14 A16 16 0 1 0 52.5 42" stroke="#3E3831" strokeWidth="0.9" fill="none" strokeLinecap="round"/>
-      <path d="M68 20 A10 10 0 1 0 58.5 38" stroke="#3E3831" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
-      <circle cx="68" cy="30" r="3.5" fill="none" stroke="#3E3831" strokeWidth="0.7"/>
-      <circle cx="68" cy="30" r="1.2" fill="#3E3831" opacity="0.5"/>
-      {/* Long antenna */}
-      <path d="M14 14 C11 6 9 1 7 -4" stroke="#3E3831" strokeWidth="1.1" strokeLinecap="round"/>
-      <circle cx="7" cy="-5" r="2" fill="#3E3831"/>
-      {/* Short antenna */}
-      <path d="M21 12 C19 5 17 1 16 -3" stroke="#3E3831" strokeWidth="1" strokeLinecap="round"/>
-      <circle cx="16" cy="-4" r="1.6" fill="#3E3831"/>
+      {/* Shell — sits on right, covers where body meets foot */}
+      <circle cx="66" cy="30" r="24" fill="#FAF6F0" stroke="#3E3831" strokeWidth="1.5"/>
+      {/* Spiral rings — all safely inside shell (r < 24) */}
+      <circle cx="66" cy="30" r="17" fill="none" stroke="#3E3831" strokeWidth="0.9"/>
+      <circle cx="66" cy="30" r="10" fill="none" stroke="#3E3831" strokeWidth="0.85"/>
+      <circle cx="66" cy="30" r="5"  fill="none" stroke="#3E3831" strokeWidth="0.8"/>
+      <circle cx="66" cy="30" r="1.5" fill="#3E3831" opacity="0.55"/>
+      {/* Eye dots on head */}
+      <circle cx="14" cy="28" r="1.8" fill="#3E3831"/>
+      <circle cx="20" cy="26" r="1.4" fill="#3E3831"/>
+      {/* Long antenna (upper) */}
+      <path d="M16 14 C13 6 11 0 9 -6" stroke="#3E3831" strokeWidth="1.1" strokeLinecap="round"/>
+      <circle cx="9" cy="-7" r="2" fill="#3E3831"/>
+      {/* Short antenna (lower) */}
+      <path d="M24 12 C22 5 20 0 19 -5" stroke="#3E3831" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="19" cy="-6" r="1.6" fill="#3E3831"/>
     </svg>
   );
 }
