@@ -158,7 +158,7 @@ export function SplashPage({ onEnter }: SplashPageProps) {
       <div
         style={{
           position: 'absolute',
-          top: '58%',
+          top: '54%',
           left: 0, right: 0,
           transform: 'translateY(-50%)',
           display: 'flex',
